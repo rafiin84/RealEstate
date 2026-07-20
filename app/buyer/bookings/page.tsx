@@ -232,11 +232,11 @@ export default function BookingsPage() {
         {/* ── Property Card ────────────────────────────────────────────── */}
         <Card className="bg-card border-border rounded-2xl overflow-hidden">
           <CardContent className="p-0">
-            <div className="relative overflow-hidden border-b border-border">
+            <div className="relative [clip-path:inset(0_round_16px_16px_0_0)] border-b border-border">
               <img
                 src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80&fit=crop&auto=format"
                 alt="Property"
-                className="absolute inset-0 w-full h-full object-cover rounded-t-2xl"
+                className="absolute inset-0 w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-white/85" />
               <div className="relative p-6">

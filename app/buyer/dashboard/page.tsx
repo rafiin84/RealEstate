@@ -255,11 +255,11 @@ export default function BuyerDashboardPage() {
                     <CardContent className="p-0">
                       <div className="flex">
                         {/* Cover image area */}
-                        <div className="w-32 md:w-40 shrink-0 relative min-h-[120px] overflow-hidden">
+                        <div className="w-32 md:w-40 shrink-0 relative min-h-[120px] [clip-path:inset(0_round_16px_0_0_16px)]">
                           <img
                             src={`https://images.unsplash.com/${prop.image}?w=300&q=80&fit=crop&auto=format`}
                             alt={prop.name}
-                            className="absolute inset-0 w-full h-full object-cover rounded-l-2xl transition-transform duration-500 group-hover:scale-105"
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                           <div className="absolute inset-0 bg-black/20" />
                           <div className="relative flex flex-col items-center justify-center gap-2 h-full">
