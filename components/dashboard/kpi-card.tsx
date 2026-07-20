@@ -14,22 +14,14 @@ interface KPICardProps {
   className?: string;
 }
 
-const gradients = {
-  blue:   "from-[#5956E9] to-[#4338ca]",
-  green:  "from-emerald-500 to-teal-600",
-  purple: "from-violet-500 to-purple-600",
-  orange: "from-orange-500 to-amber-500",
-  rose:   "from-rose-500 to-pink-600",
-  teal:   "from-cyan-500 to-teal-500",
-};
-
-const glows = {
-  blue:   "shadow-[#5956E9]/25",
-  green:  "shadow-emerald-500/20",
-  purple: "shadow-violet-500/20",
-  orange: "shadow-orange-500/20",
-  rose:   "shadow-rose-500/20",
-  teal:   "shadow-cyan-500/20",
+/* Light-tinted card style — matches Dropify reference */
+const colorTokens = {
+  blue:   { icon: "bg-primary/10 text-primary",           change: "text-primary",          dot: "bg-primary" },
+  green:  { icon: "bg-emerald-100 text-emerald-600",       change: "text-emerald-600",      dot: "bg-emerald-500" },
+  purple: { icon: "bg-violet-100 text-violet-600",         change: "text-violet-600",       dot: "bg-violet-500" },
+  orange: { icon: "bg-orange-100 text-orange-600",         change: "text-orange-600",       dot: "bg-orange-500" },
+  rose:   { icon: "bg-rose-100 text-rose-600",             change: "text-rose-600",         dot: "bg-rose-500" },
+  teal:   { icon: "bg-cyan-100 text-cyan-600",             change: "text-cyan-600",         dot: "bg-cyan-500" },
 };
 
 export function KPICard({
@@ -44,50 +36,43 @@ export function KPICard({
 }: KPICardProps) {
   const isPositive = change > 0;
   const isNeutral = change === 0;
+  const t = colorTokens[color];
 
   return (
     <div className={cn(
-      "relative overflow-hidden rounded-2xl p-5 text-white shadow-lg",
-      "bg-gradient-to-br",
-      gradients[color],
-      glows[color],
+      "bg-card rounded-2xl p-5 border border-border",
+      "shadow-[0_2px_8px_rgba(124,111,247,0.06)]",
+      "hover:shadow-[0_4px_16px_rgba(124,111,247,0.10)] transition-shadow duration-200",
       className
     )}>
-      {/* Decorative circle top-right */}
-      <div className="absolute -top-5 -right-5 w-24 h-24 rounded-full bg-white/10" />
-      <div className="absolute -bottom-8 -right-4 w-32 h-32 rounded-full bg-white/8" />
-
-      {/* Top row: icon + change badge */}
-      <div className="relative flex items-start justify-between gap-2 mb-4">
-        <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
-          <div className="w-5 h-5 text-white">{icon}</div>
+      {/* Top row: icon + change */}
+      <div className="flex items-start justify-between gap-2 mb-4">
+        <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center shrink-0", t.icon)}>
+          <div className="w-5 h-5">{icon}</div>
         </div>
         <div className={cn(
-          "flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold",
+          "flex items-center gap-1 text-[11px] font-semibold px-2 py-1 rounded-full",
           isNeutral
-            ? "bg-white/15 text-white/80"
+            ? "bg-muted text-muted-foreground"
             : isPositive
-            ? "bg-white/25 text-white"
-            : "bg-black/20 text-white/90"
+            ? "bg-emerald-50 text-emerald-600"
+            : "bg-rose-50 text-rose-600"
         )}>
-          {isNeutral ? (
-            <Minus className="w-3 h-3" />
-          ) : isPositive ? (
-            <TrendingUp className="w-3 h-3" />
-          ) : (
-            <TrendingDown className="w-3 h-3" />
-          )}
+          {isNeutral
+            ? <Minus className="w-3 h-3" />
+            : isPositive
+            ? <TrendingUp className="w-3 h-3" />
+            : <TrendingDown className="w-3 h-3" />
+          }
           <span>{isNeutral ? "—" : `${isPositive ? "+" : ""}${change}%`}</span>
         </div>
       </div>
 
-      {/* Value + label */}
-      <div className="relative">
-        <p className="text-2xl font-extrabold tracking-tight leading-none">{value}</p>
-        <p className="text-xs font-semibold text-white/75 mt-1.5">{title}</p>
-        {subtitle && <p className="text-[11px] text-white/50 mt-0.5 truncate">{subtitle}</p>}
-        <p className="text-[10px] text-white/40 mt-2">{changeLabel}</p>
-      </div>
+      {/* Value */}
+      <p className="text-2xl font-extrabold text-foreground tracking-tight leading-none">{value}</p>
+      <p className="text-xs font-medium text-muted-foreground mt-1.5">{title}</p>
+      {subtitle && <p className="text-[11px] text-muted-foreground/60 mt-0.5 truncate">{subtitle}</p>}
+      <p className="text-[10px] text-muted-foreground/50 mt-2">{changeLabel}</p>
     </div>
   );
 }
