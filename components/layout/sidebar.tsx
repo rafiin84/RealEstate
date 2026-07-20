@@ -47,10 +47,10 @@ export function Sidebar({ navGroups, variant = "os" }: SidebarProps) {
         {!collapsed && (
           <div className="flex flex-col min-w-0">
             <span className="text-sm font-semibold text-sidebar-foreground truncate leading-none">
-              {variant === "os" ? "Real Estate OS" : "Buyer OS"}
+              {variant === "os" ? "Godrej Properties" : "Buyer Portal"}
             </span>
             <span className="text-[10px] text-muted-foreground leading-none mt-0.5">
-              {variant === "os" ? "Enterprise" : "My Home Journey"}
+              {variant === "os" ? "Enterprise OS" : "My Home Journey"}
             </span>
           </div>
         )}

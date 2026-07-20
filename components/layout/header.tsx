@@ -33,7 +33,7 @@ export function Header({ variant = "os" }: HeaderProps) {
         {/* Left - Breadcrumb / Page title injected via layout */}
         <div className="flex items-center gap-2 min-w-0">
           <span className="text-sm font-medium text-muted-foreground">
-            {variant === "os" ? "Real Estate OS" : "Buyer OS"}
+            {variant === "os" ? "Godrej Properties" : "Buyer Portal"}
           </span>
         </div>
 
