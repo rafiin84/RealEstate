@@ -280,7 +280,7 @@ export default function ReferralsPage() {
 
         {/* ── Referral Code Card ───────────────────────────────────────── */}
         <Card className="bg-gradient-to-br from-violet-900/40 via-purple-900/20 to-[#12121f] border-violet-500/25 rounded-2xl overflow-hidden">
-          <CardContent className="p-6">
+          <CardContent className="p-4 md:p-6">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">

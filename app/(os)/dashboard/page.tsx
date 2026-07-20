@@ -43,8 +43,6 @@ import {
   MapPin,
   Sparkles,
   ArrowUpRight,
-  ArrowDownRight,
-  Minus,
   Calendar,
   Filter,
   Download,
@@ -90,14 +88,6 @@ const ICON_MAP: Record<
   MapPin,
 };
 
-const COLOR_HEX: Record<KPICardType["color"], string> = {
-  blue: "#6366f1",
-  green: "#22c55e",
-  purple: "#a855f7",
-  teal: "#06b6d4",
-  orange: "#f97316",
-  rose: "#f43f5e",
-};
 
 const RECENT_ACTIVITIES = [
   {
@@ -227,85 +217,49 @@ export default function DashboardPage() {
       <div className="max-w-[1600px] mx-auto p-6 space-y-6">
 
         {/* ── Page Header ──────────────────────────────────────────────────── */}
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h1 className="text-xl font-semibold text-foreground">Executive Dashboard</h1>
-            <div className="flex items-center gap-2 mt-1">
-              <Calendar className="w-3.5 h-3.5 text-muted-foreground" />
-              <p className="text-sm text-muted-foreground">July 20, 2024 · FY 2024–25</p>
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-blue-700 to-indigo-600 p-5 md:p-6 text-white">
+          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 80% 50%, #ffffff 0%, transparent 60%)" }} />
+          <div className="relative flex items-start justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <Sparkles className="w-4 h-4 text-indigo-200" />
+                <span className="text-xs font-medium text-indigo-200 uppercase tracking-wider">Executive Dashboard</span>
+              </div>
+              <h1 className="text-xl md:text-2xl font-bold">Godrej Properties</h1>
+              <div className="flex items-center gap-2 mt-1">
+                <Calendar className="w-3.5 h-3.5 text-white/60" />
+                <p className="text-sm text-white/70">July 20, 2026 · FY 2026–27</p>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-2 shrink-0">
-            <Button variant="outline" size="sm" className="gap-1.5 h-8 text-xs">
-              <Download className="w-3.5 h-3.5" />
-              Export
-            </Button>
-            <Button size="sm" className="gap-1.5 h-8 text-xs">
-              <Sparkles className="w-3.5 h-3.5" />
-              Generate AI Report
-            </Button>
+            <div className="flex items-center gap-2 shrink-0">
+              <Button variant="outline" size="sm" className="gap-1.5 h-8 text-xs bg-white/10 border-white/20 text-white hover:bg-white/20">
+                <Download className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Export</span>
+              </Button>
+              <Button size="sm" className="gap-1.5 h-8 text-xs bg-white text-indigo-700 hover:bg-white/90">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">AI Report</span>
+              </Button>
+            </div>
           </div>
         </div>
 
-        {/* ── KPI Cards — 2 rows × 3 cols on desktop ───────────────────────── */}
+        {/* ── KPI Cards ─────────────────────────────────────────────────────── */}
         <section>
-          <SectionHeading>Key Metrics</SectionHeading>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {(executiveDashboardKPIs as KPICardType[]).map((kpi) => {
               const Icon = ICON_MAP[kpi.icon];
               return (
-                <Card key={kpi.id} className="relative overflow-hidden py-0">
-                  <CardContent className="p-4">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-medium text-muted-foreground truncate">{kpi.title}</p>
-                        <p className="text-2xl font-bold tracking-tight mt-1.5 text-foreground">
-                          {kpi.value}
-                        </p>
-                        {kpi.subtitle && (
-                          <p className="text-xs text-muted-foreground mt-0.5 truncate">{kpi.subtitle}</p>
-                        )}
-                        <div className="flex items-center gap-1 mt-2">
-                          {kpi.change === 0 ? (
-                            <Minus className="w-3 h-3 text-muted-foreground" />
-                          ) : kpi.change > 0 ? (
-                            <ArrowUpRight className="w-3.5 h-3.5 text-emerald-500" />
-                          ) : (
-                            <ArrowDownRight className="w-3.5 h-3.5 text-rose-500" />
-                          )}
-                          <span
-                            className={
-                              kpi.change === 0
-                                ? "text-xs text-muted-foreground"
-                                : kpi.change > 0
-                                ? "text-xs font-medium text-emerald-600 dark:text-emerald-400"
-                                : "text-xs font-medium text-rose-600 dark:text-rose-400"
-                            }
-                          >
-                            {kpi.change === 0 ? "No change" : `${kpi.change > 0 ? "+" : ""}${kpi.change}%`}
-                          </span>
-                          <span className="text-xs text-muted-foreground truncate">{kpi.changeLabel}</span>
-                        </div>
-                      </div>
-                      <div
-                        className="p-2.5 rounded-lg shrink-0"
-                        style={{ background: COLOR_HEX[kpi.color] + "18" }}
-                      >
-                        {Icon ? (
-                          <Icon
-                            className="w-5 h-5"
-                            style={{ color: COLOR_HEX[kpi.color] }}
-                          />
-                        ) : (
-                          <DollarSign
-                            className="w-5 h-5"
-                            style={{ color: COLOR_HEX[kpi.color] }}
-                          />
-                        )}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                <KPICard
+                  key={kpi.id}
+                  title={kpi.title}
+                  value={kpi.value}
+                  subtitle={kpi.subtitle}
+                  change={kpi.change}
+                  changeLabel={kpi.changeLabel}
+                  color={kpi.color}
+                  icon={Icon ? <Icon className="w-5 h-5" /> : <DollarSign className="w-5 h-5" />}
+                />
               );
             })}
           </div>

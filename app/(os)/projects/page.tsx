@@ -527,92 +527,80 @@ export default function ProjectsPage() {
   const soldUnits = projects.reduce((s, p) => s + p.soldUnits, 0);
 
   return (
-    <div className="p-6 space-y-5 max-w-screen-2xl mx-auto">
+    <div className="p-4 md:p-6 space-y-5 max-w-screen-2xl mx-auto">
       {/* ── Page Header ── */}
-      <div className="flex items-center justify-between flex-wrap gap-3">
-        <div className="flex items-center gap-3">
-          <div className="p-2 bg-primary/10 rounded-lg">
-            <Layers className="w-5 h-5 text-primary" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-xl font-semibold text-foreground">
-                Projects
-              </h1>
-              <Badge
-                variant="secondary"
-                className="text-xs font-semibold px-2 py-0.5"
-              >
-                {projects.length}
-              </Badge>
+      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-800 to-slate-600 p-5 md:p-6 text-white">
+        <div className="absolute inset-0 opacity-15 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 85% 30%, rgba(255,255,255,0.9) 0%, transparent 55%)" }} />
+        <div className="relative flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="hidden sm:flex w-10 h-10 rounded-xl bg-white/15 items-center justify-center shrink-0">
+              <Layers className="w-5 h-5" />
             </div>
-            <p className="text-xs text-muted-foreground mt-0.5">
-              Manage and track all real estate projects
-            </p>
+            <div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-white/60 mb-0.5">Project Portfolio</div>
+              <h1 className="text-lg md:text-xl font-bold">Projects <span className="text-white/60 text-base font-medium">({projects.length})</span></h1>
+              <p className="text-sm text-white/60 mt-0.5">Manage and track all Godrej Properties developments</p>
+            </div>
           </div>
+          <Button size="sm" className="gap-1.5 h-8 bg-white/15 border border-white/20 text-white hover:bg-white/25">
+            <Plus className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">New Project</span>
+          </Button>
         </div>
-        <Button size="sm" className="gap-1.5 h-8">
-          <Plus className="w-3.5 h-3.5" />
-          New Project
-        </Button>
       </div>
 
       {/* ── KPI Row ── */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
         {kpis.map((kpi) => {
-          const colors = kpiColorMap[kpi.color];
           const Icon = kpi.icon;
           const isPositive = kpi.change > 0;
+          // Use legacy card style for the 5-column narrow cards
+          const colorMap2: Record<string, string> = {
+            blue: "from-blue-500 to-blue-700",
+            orange: "from-orange-500 to-amber-600",
+            green: "from-emerald-500 to-teal-600",
+            purple: "from-violet-500 to-purple-700",
+            teal: "from-cyan-500 to-teal-600",
+          };
           return (
-            <Card
+            <div
               key={kpi.id}
-              className={`border-border/60`}
+              className={`relative overflow-hidden rounded-xl p-4 text-white bg-gradient-to-br ${colorMap2[kpi.color] || "from-slate-500 to-slate-700"}`}
             >
-              <CardContent className="p-4">
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[11px] font-medium text-muted-foreground truncate uppercase tracking-wide">
-                      {kpi.title}
-                    </p>
-                    <p className="text-2xl font-bold tracking-tight mt-1 text-foreground">
-                      {kpi.id === "sold"
-                        ? soldUnits.toString()
-                        : kpi.value}
-                    </p>
-                    <p className="text-[10px] text-muted-foreground mt-0.5 truncate">
-                      {kpi.sub}
-                    </p>
-                    {kpi.change !== 0 && (
-                      <div className="flex items-center gap-1 mt-1.5">
-                        {isPositive ? (
-                          <ChevronUp className="w-3 h-3 text-emerald-500" />
-                        ) : (
-                          <ChevronDown className="w-3 h-3 text-rose-500" />
-                        )}
-                        <span
-                          className={`text-[10px] font-semibold ${
-                            isPositive
-                              ? "text-emerald-600 dark:text-emerald-400"
-                              : "text-rose-600 dark:text-rose-400"
-                          }`}
-                        >
-                          {isPositive ? "+" : ""}
+              <div className="absolute -top-3 -right-3 w-16 h-16 rounded-full bg-white/10" />
+              <div className="flex items-start gap-2 mb-2">
+                <div className="w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center shrink-0">
+                  <Icon className="w-3.5 h-3.5 text-white" />
+                </div>
+                <span className={`ml-auto text-[10px] font-semibold px-1.5 py-0.5 rounded-full ${isPositive ? "bg-white/20" : "bg-black/20"}`}>
+                  {isPositive ? "+" : ""}{kpi.change}%
+                </span>
+              </div>
+              <p className="text-xl font-bold leading-none">
+                {kpi.id === "sold"
+                  ? soldUnits.toString()
+                  : kpi.value}
+              </p>
+              <p className="text-[11px] text-white/70 mt-0.5 truncate">{kpi.title}</p>
+              <div className="flex items-center gap-1 mt-1.5">
+                {isPositive ? (
+                  <ChevronUp className="w-3 h-3 text-white/70" />
+                ) : (
+                  <ChevronDown className="w-3 h-3 text-white/70" />
+                )}
+                <span
+                  className="text-[10px] text-white/70"
+                >
+                  {isPositive ? "+" : ""}
                           {kpi.change}%
                         </span>
-                        <span className="text-[10px] text-muted-foreground">
+                        <span className="text-[10px] text-white/60">
                           {kpi.changeLabel}
                         </span>
                       </div>
-                    )}
-                  </div>
-                  <div className={`p-2.5 rounded-lg shrink-0 ${colors.bg}`}>
-                    <Icon className={`w-4 h-4 ${colors.icon}`} />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
+                    </div>
+                  );
+                })}
       </div>
 
       {/* ── Search + Filter bar ── */}

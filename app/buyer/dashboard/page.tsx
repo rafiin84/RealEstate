@@ -153,19 +153,23 @@ export default function BuyerDashboardPage() {
     <div className="p-5 md:p-6 space-y-6 max-w-7xl mx-auto">
 
       {/* ── Greeting ───────────────────────────────────────────────── */}
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-foreground tracking-tight">
-            Good morning, Ramesh
-          </h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Sunday, July 20, 2024 &nbsp;·&nbsp; Your dream home is closer than you think
-          </p>
+      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-700 to-teal-600 p-5 md:p-6 text-white">
+        <div className="absolute inset-0 opacity-15 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 90% 30%, rgba(255,255,255,0.9) 0%, transparent 55%)" }} />
+        <div className="relative flex items-center justify-between gap-4">
+          <div>
+            <div className="text-[10px] font-bold uppercase tracking-wider text-emerald-200/70 mb-1">My Home Journey</div>
+            <h1 className="text-xl md:text-2xl font-bold tracking-tight">
+              Good morning, Ramesh 👋
+            </h1>
+            <p className="text-sm text-emerald-100/70 mt-1">
+              Sunday, July 20, 2026 · Your dream home is closer than you think
+            </p>
+          </div>
+          <Button size="sm" className="gap-1.5 shrink-0 bg-white/15 border border-white/20 text-white hover:bg-white/25">
+            <Phone className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Talk to Advisor</span>
+          </Button>
         </div>
-        <Button variant="outline" size="sm" className="gap-1.5 shrink-0">
-          <Phone className="w-3.5 h-3.5" />
-          Talk to Advisor
-        </Button>
       </div>
 
       {/* ── AI Buyer Persona ────────────────────────────────────────── */}

@@ -315,7 +315,7 @@ export default function SalesPage() {
   }));
 
   return (
-    <div className="p-6 space-y-5 min-h-screen">
+    <div className="p-4 md:p-6 space-y-5 min-h-screen">
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">

@@ -9,7 +9,7 @@ import {
   ShieldCheck, Wrench, Wallet, CreditCard, Landmark, Scale, ClipboardCheck,
   Truck, PieChart, Store, BarChart3, Sparkles, HardDrive, Settings2,
   Search, Heart, FolderOpen, MapPin, FileText, Gift, User, ChevronLeft,
-  ChevronRight, Building, Bell, Moon, Sun, LogOut, ExternalLink,
+  ChevronRight, Building, ExternalLink, X,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
@@ -26,42 +26,54 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 interface SidebarProps {
   navGroups: NavGroup[];
   variant?: "os" | "buyer";
+  mobileOpen?: boolean;
+  onMobileClose?: () => void;
 }
 
-export function Sidebar({ navGroups, variant = "os" }: SidebarProps) {
+export function Sidebar({ navGroups, variant = "os", mobileOpen = false, onMobileClose }: SidebarProps) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
 
-  return (
+  const SidebarContent = (
     <aside
       className={cn(
-        "flex flex-col h-screen bg-sidebar border-r border-sidebar-border transition-all duration-300 shrink-0",
-        collapsed ? "w-14" : "w-60"
+        "flex flex-col h-full transition-all duration-300 sidebar-gradient",
+        collapsed ? "w-14" : "w-64"
       )}
     >
       {/* Logo */}
-      <div className={cn("flex items-center gap-2.5 px-4 py-4 border-b border-sidebar-border", collapsed && "justify-center px-0")}>
-        <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shrink-0">
-          <Building className="w-4 h-4 text-primary-foreground" />
+      <div className={cn(
+        "flex items-center gap-3 px-4 py-4 border-b border-white/5 shrink-0",
+        collapsed && "justify-center px-0"
+      )}>
+        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center shrink-0 shadow-lg shadow-emerald-500/30">
+          <Building className="w-4 h-4 text-white" />
         </div>
         {!collapsed && (
           <div className="flex flex-col min-w-0">
-            <span className="text-sm font-semibold text-sidebar-foreground truncate leading-none">
+            <span className="text-[13px] font-bold text-white truncate leading-none">
               {variant === "os" ? "Godrej Properties" : "Buyer Portal"}
             </span>
-            <span className="text-[10px] text-muted-foreground leading-none mt-0.5">
+            <span className="text-[10px] text-white/40 leading-none mt-0.5 tracking-wide">
               {variant === "os" ? "Enterprise OS" : "My Home Journey"}
             </span>
           </div>
         )}
+        {/* Mobile close */}
+        <button
+          onClick={onMobileClose}
+          className="ml-auto lg:hidden p-1 rounded-md text-white/40 hover:text-white hover:bg-white/5"
+        >
+          <X className="w-4 h-4" />
+        </button>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto scrollbar-hide py-3 px-2 space-y-4">
+      <nav className="flex-1 overflow-y-auto scrollbar-hide py-3 px-2 space-y-5">
         {navGroups.map((group) => (
           <div key={group.label}>
             {!collapsed && (
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60 px-2 mb-1">
+              <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-white/30 px-2 mb-1.5">
                 {group.label}
               </p>
             )}
@@ -73,30 +85,35 @@ export function Sidebar({ navGroups, variant = "os" }: SidebarProps) {
                   <li key={item.href}>
                     <Link
                       href={item.href}
+                      onClick={onMobileClose}
                       className={cn(
-                        "flex items-center gap-2.5 px-2 py-1.5 rounded-md text-sm transition-colors group relative",
+                        "flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[13px] transition-all duration-150 group relative",
                         isActive
-                          ? "bg-primary/10 text-primary font-medium"
-                          : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent",
+                          ? "bg-gradient-to-r from-indigo-500/25 to-violet-500/15 text-white font-medium shadow-sm"
+                          : "text-white/50 hover:text-white/85 hover:bg-white/5",
                         collapsed && "justify-center px-0 w-10 mx-auto"
                       )}
                       title={collapsed ? item.label : undefined}
                     >
+                      {/* Active left accent */}
+                      {isActive && !collapsed && (
+                        <span className="absolute left-0 top-1.5 bottom-1.5 w-0.5 rounded-r-full bg-gradient-to-b from-indigo-400 to-violet-500" />
+                      )}
                       {Icon && (
-                        <Icon className={cn("w-4 h-4 shrink-0", isActive ? "text-primary" : "text-muted-foreground group-hover:text-sidebar-foreground")} />
+                        <Icon className={cn(
+                          "w-4 h-4 shrink-0 transition-colors",
+                          isActive ? "text-indigo-300" : "text-white/35 group-hover:text-white/65"
+                        )} />
                       )}
                       {!collapsed && (
                         <>
                           <span className="flex-1 truncate">{item.label}</span>
                           {item.badge && (
-                            <Badge variant="secondary" className="h-4 min-w-[16px] px-1 text-[10px] bg-primary/15 text-primary border-0">
+                            <Badge className="h-4 min-w-[18px] px-1 text-[10px] bg-indigo-500/30 text-indigo-200 border-0 font-medium">
                               {item.badge}
                             </Badge>
                           )}
                         </>
-                      )}
-                      {isActive && (
-                        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-r-full bg-primary" />
                       )}
                     </Link>
                   </li>
@@ -108,42 +125,71 @@ export function Sidebar({ navGroups, variant = "os" }: SidebarProps) {
       </nav>
 
       {/* Footer */}
-      <div className={cn("border-t border-sidebar-border p-2 space-y-0.5", collapsed && "px-0")}>
+      <div className={cn("border-t border-white/5 p-2 space-y-0.5 shrink-0", collapsed && "px-1")}>
         {variant === "os" && (
           <Link
             href="/buyer/dashboard"
+            onClick={onMobileClose}
             className={cn(
-              "flex items-center gap-2.5 px-2 py-1.5 rounded-md text-xs text-muted-foreground hover:text-sidebar-foreground hover:bg-sidebar-accent transition-colors",
+              "flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs text-white/40 hover:text-white/70 hover:bg-white/5 transition-colors",
               collapsed && "justify-center px-0 w-10 mx-auto"
             )}
           >
-            <ExternalLink className="w-4 h-4 shrink-0" />
-            {!collapsed && <span>Switch to Buyer OS</span>}
+            <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+            {!collapsed && <span>Switch to Buyer Portal</span>}
           </Link>
         )}
         {variant === "buyer" && (
           <Link
             href="/dashboard"
+            onClick={onMobileClose}
             className={cn(
-              "flex items-center gap-2.5 px-2 py-1.5 rounded-md text-xs text-muted-foreground hover:text-sidebar-foreground hover:bg-sidebar-accent transition-colors",
+              "flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs text-white/40 hover:text-white/70 hover:bg-white/5 transition-colors",
               collapsed && "justify-center px-0 w-10 mx-auto"
             )}
           >
-            <ExternalLink className="w-4 h-4 shrink-0" />
+            <ExternalLink className="w-3.5 h-3.5 shrink-0" />
             {!collapsed && <span>Switch to Enterprise OS</span>}
           </Link>
         )}
         <button
           onClick={() => setCollapsed(!collapsed)}
           className={cn(
-            "w-full flex items-center gap-2.5 px-2 py-1.5 rounded-md text-xs text-muted-foreground hover:text-sidebar-foreground hover:bg-sidebar-accent transition-colors",
+            "w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs text-white/40 hover:text-white/70 hover:bg-white/5 transition-colors",
             collapsed && "justify-center px-0 w-10 mx-auto"
           )}
         >
-          {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+          {collapsed ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronLeft className="w-3.5 h-3.5" />}
           {!collapsed && <span>Collapse</span>}
         </button>
       </div>
     </aside>
+  );
+
+  return (
+    <>
+      {/* Mobile overlay backdrop */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
+          onClick={onMobileClose}
+        />
+      )}
+
+      {/* Desktop sidebar — always visible */}
+      <div className="hidden lg:flex h-full shrink-0 border-r border-white/5">
+        {SidebarContent}
+      </div>
+
+      {/* Mobile sidebar — slide-in drawer */}
+      <div
+        className={cn(
+          "fixed inset-y-0 left-0 z-50 lg:hidden flex h-full transition-transform duration-300 ease-in-out",
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
+        {SidebarContent}
+      </div>
+    </>
   );
 }
