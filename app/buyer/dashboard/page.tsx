@@ -255,7 +255,7 @@ export default function BuyerDashboardPage() {
                     <CardContent className="p-0">
                       <div className="flex">
                         {/* Cover image area */}
-                        <div className="w-32 md:w-40 shrink-0 relative min-h-[120px] overflow-hidden">
+                        <div className="w-32 md:w-40 shrink-0 relative min-h-[120px] overflow-hidden rounded-l-2xl">
                           <img
                             src={`https://images.unsplash.com/${prop.image}?w=300&q=80&fit=crop&auto=format`}
                             alt={prop.name}

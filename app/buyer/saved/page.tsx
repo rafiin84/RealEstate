@@ -453,7 +453,7 @@ export default function SavedPage() {
                   }`}
                 >
                   {/* ── Photo header ── */}
-                  <div className="relative h-40 overflow-hidden">
+                  <div className="relative h-40 overflow-hidden rounded-t-2xl">
                     <img
                       src={`https://images.unsplash.com/${meta?.image ?? "photo-1545324418-cc1a3fa10c00"}?w=600&q=80&fit=crop&auto=format`}
                       alt={project.name}

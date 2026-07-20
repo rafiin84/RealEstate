@@ -537,7 +537,7 @@ export default function DiscoverPage() {
                         className="group relative bg-card border-border rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-lg transition-all duration-300"
                       >
                         {/* ── Photo Header ── */}
-                        <div className="relative h-44 overflow-hidden">
+                        <div className="relative h-44 overflow-hidden rounded-t-2xl">
                           <img
                             src={`https://images.unsplash.com/${meta?.image ?? "photo-1545324418-cc1a3fa10c00"}?w=600&q=80&fit=crop&auto=format`}
                             alt={project.name}
