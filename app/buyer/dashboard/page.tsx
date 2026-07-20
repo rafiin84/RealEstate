@@ -259,7 +259,7 @@ export default function BuyerDashboardPage() {
                           <img
                             src={`https://images.unsplash.com/${prop.image}?w=300&q=80&fit=crop&auto=format`}
                             alt={prop.name}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="absolute inset-0 w-full h-full object-cover rounded-l-2xl transition-transform duration-500 group-hover:scale-105"
                           />
                           <div className="absolute inset-0 bg-black/20" />
                           <div className="relative flex flex-col items-center justify-center gap-2 h-full">

@@ -313,11 +313,11 @@ export default function VisitsPage() {
                 key={visit.id}
                 className="bg-card border-0 ring-1 ring-border hover:ring-primary/20 rounded-2xl overflow-hidden transition-all"
               >
-                <div className="relative h-28 overflow-hidden">
+                <div className="relative h-28 overflow-hidden rounded-t-2xl">
                   <img
                     src={`https://images.unsplash.com/${projectImageMap[visit.project] ?? "photo-1545324418-cc1a3fa10c00"}?w=800&q=80&fit=crop&auto=format`}
                     alt={visit.project}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover rounded-t-2xl"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
@@ -416,11 +416,11 @@ export default function VisitsPage() {
                   key={visit.id}
                   className="bg-card border-0 ring-1 ring-border rounded-2xl overflow-hidden"
                 >
-                  <div className="relative h-36 overflow-hidden">
+                  <div className="relative h-36 overflow-hidden rounded-t-2xl">
                     <img
                       src={`https://images.unsplash.com/${projectImageMap[visit.project] ?? "photo-1545324418-cc1a3fa10c00"}?w=800&q=80&fit=crop&auto=format`}
                       alt={visit.project}
-                      className="absolute inset-0 w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-cover rounded-t-2xl"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                     <div className="absolute bottom-3 left-4 right-4">
@@ -495,7 +495,7 @@ export default function VisitsPage() {
                             <img
                               src={`https://images.unsplash.com/${interiorPhotos[i % interiorPhotos.length]}?w=100&q=80&fit=crop&auto=format`}
                               alt={`Photo ${i + 1}`}
-                              className="absolute inset-0 w-full h-full object-cover"
+                              className="absolute inset-0 w-full h-full object-cover rounded-xl"
                             />
                           </div>
                         );

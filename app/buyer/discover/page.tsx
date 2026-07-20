@@ -541,7 +541,7 @@ export default function DiscoverPage() {
                           <img
                             src={`https://images.unsplash.com/${meta?.image ?? "photo-1545324418-cc1a3fa10c00"}?w=600&q=80&fit=crop&auto=format`}
                             alt={project.name}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="absolute inset-0 w-full h-full object-cover rounded-t-2xl transition-transform duration-500 group-hover:scale-105"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/10" />
                           <div className="relative flex flex-col justify-between h-full p-4">

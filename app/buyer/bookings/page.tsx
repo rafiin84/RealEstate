@@ -236,7 +236,7 @@ export default function BookingsPage() {
               <img
                 src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80&fit=crop&auto=format"
                 alt="Property"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover rounded-t-2xl"
               />
               <div className="absolute inset-0 bg-white/85" />
               <div className="relative p-6">
