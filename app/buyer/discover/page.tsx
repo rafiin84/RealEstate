@@ -534,10 +534,10 @@ export default function DiscoverPage() {
                     return (
                       <Card
                         key={project.id}
-                        className="group relative bg-card border-border rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                        className="group relative bg-card border-0 ring-1 ring-border hover:ring-primary/30 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300"
                       >
                         {/* ── Photo Header ── */}
-                        <div className="relative h-44 overflow-hidden rounded-t-2xl">
+                        <div className="relative h-44 overflow-hidden">
                           <img
                             src={`https://images.unsplash.com/${meta?.image ?? "photo-1545324418-cc1a3fa10c00"}?w=600&q=80&fit=crop&auto=format`}
                             alt={project.name}

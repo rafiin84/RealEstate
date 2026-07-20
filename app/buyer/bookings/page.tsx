@@ -232,7 +232,14 @@ export default function BookingsPage() {
         {/* ── Property Card ────────────────────────────────────────────── */}
         <Card className="bg-card border-border rounded-2xl overflow-hidden">
           <CardContent className="p-0">
-            <div className="bg-primary/5 p-6 border-b border-border">
+            <div className="relative overflow-hidden border-b border-border">
+              <img
+                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80&fit=crop&auto=format"
+                alt="Property"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-white/85" />
+              <div className="relative p-6">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex gap-4">
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
@@ -261,6 +268,7 @@ export default function BookingsPage() {
                   <Phone className="w-3 h-3" />
                   Call Agent
                 </Button>
+              </div>
               </div>
             </div>
 

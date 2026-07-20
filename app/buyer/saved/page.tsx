@@ -448,12 +448,12 @@ export default function SavedPage() {
               return (
                 <Card
                   key={project.id}
-                  className={`group relative bg-card border rounded-2xl overflow-hidden transition-all duration-200 hover:shadow-lg ${
-                    isComparing ? "border-sky-500/40" : "border-border hover:border-primary/25"
+                  className={`group relative bg-card border-0 rounded-2xl overflow-hidden transition-all duration-200 hover:shadow-lg ${
+                    isComparing ? "ring-2 ring-sky-500/40" : "ring-1 ring-border hover:ring-primary/25"
                   }`}
                 >
                   {/* ── Photo header ── */}
-                  <div className="relative h-40 overflow-hidden rounded-t-2xl">
+                  <div className="relative h-40 overflow-hidden">
                     <img
                       src={`https://images.unsplash.com/${meta?.image ?? "photo-1545324418-cc1a3fa10c00"}?w=600&q=80&fit=crop&auto=format`}
                       alt={project.name}

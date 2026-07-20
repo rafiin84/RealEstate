@@ -251,11 +251,11 @@ export default function BuyerDashboardPage() {
               {matchedProperties.map(prop => {
                 const Icon = prop.icon;
                 return (
-                  <Card key={prop.id} className="overflow-hidden hover:shadow-md transition-all duration-200 group">
+                  <Card key={prop.id} className="border-0 ring-1 ring-border hover:ring-primary/30 overflow-hidden hover:shadow-md transition-all duration-200 group">
                     <CardContent className="p-0">
                       <div className="flex">
                         {/* Cover image area */}
-                        <div className="w-32 md:w-40 shrink-0 relative min-h-[120px] overflow-hidden rounded-l-2xl">
+                        <div className="w-32 md:w-40 shrink-0 relative min-h-[120px] overflow-hidden">
                           <img
                             src={`https://images.unsplash.com/${prop.image}?w=300&q=80&fit=crop&auto=format`}
                             alt={prop.name}

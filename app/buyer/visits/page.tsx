@@ -27,6 +27,13 @@ import {
   CalendarDays,
 } from "lucide-react";
 
+const projectImageMap: Record<string, string> = {
+  "Green Valley Plots": "photo-1500382017468-9049fed747ef",
+  "Prestige Heights": "photo-1545324418-cc1a3fa10c00",
+  "Skyline Villas": "photo-1613977257363-707ba9348227",
+  "Godrej Meridien": "photo-1460317442991-0ec209397118",
+};
+
 // ─── Mock data ──────────────────────────────────────────────────────────────
 
 const upcomingVisits = [
@@ -304,8 +311,23 @@ export default function VisitsPage() {
             {upcomingVisits.map((visit) => (
               <Card
                 key={visit.id}
-                className="bg-card border-border rounded-2xl overflow-hidden hover:border-primary/20 transition-all"
+                className="bg-card border-0 ring-1 ring-border hover:ring-primary/20 rounded-2xl overflow-hidden transition-all"
               >
+                <div className="relative h-28 overflow-hidden">
+                  <img
+                    src={`https://images.unsplash.com/${projectImageMap[visit.project] ?? "photo-1545324418-cc1a3fa10c00"}?w=800&q=80&fit=crop&auto=format`}
+                    alt={visit.project}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
+                    <div>
+                      <p className="text-white font-semibold text-sm leading-tight">{visit.project}</p>
+                      <p className="text-white/70 text-xs">{visit.address}</p>
+                    </div>
+                    <Badge className="bg-primary text-white border-0 text-[10px] shrink-0">{visit.type}</Badge>
+                  </div>
+                </div>
                 <CardContent className="p-5">
                   <div className="flex gap-4">
                     {/* QR Code placeholder */}
@@ -392,8 +414,23 @@ export default function VisitsPage() {
               return (
                 <Card
                   key={visit.id}
-                  className="bg-card border-border rounded-2xl overflow-hidden"
+                  className="bg-card border-0 ring-1 ring-border rounded-2xl overflow-hidden"
                 >
+                  <div className="relative h-36 overflow-hidden">
+                    <img
+                      src={`https://images.unsplash.com/${projectImageMap[visit.project] ?? "photo-1545324418-cc1a3fa10c00"}?w=800&q=80&fit=crop&auto=format`}
+                      alt={visit.project}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-3 left-4 right-4">
+                      <p className="text-white font-semibold text-sm">{visit.project}</p>
+                      <div className="flex items-center gap-3 mt-1">
+                        <StarRating rating={visit.rating} />
+                        <span className="text-white/60 text-xs">{visit.date}</span>
+                      </div>
+                    </div>
+                  </div>
                   <CardHeader className="pb-0 px-5 pt-5">
                     <div className="flex items-start justify-between gap-3">
                       <div>
@@ -440,19 +477,32 @@ export default function VisitsPage() {
                       ))}
                     </div>
 
-                    {/* Photo thumbnails placeholder */}
+                    {/* Photo thumbnails */}
                     <div className="flex gap-2">
-                      {Array.from({ length: Math.min(visit.photosCount, 5) }).map((_, i) => (
-                        <div
-                          key={i}
-                          className="w-14 h-14 rounded-xl bg-muted/40 border border-border flex items-center justify-center shrink-0"
-                        >
-                          <Camera className="w-4 h-4 text-muted-foreground" />
-                        </div>
-                      ))}
+                      {Array.from({ length: Math.min(visit.photosCount, 5) }).map((_, i) => {
+                        const interiorPhotos = [
+                          "photo-1555041469-a586c61ea9bc",
+                          "photo-1560185007-cde436f6a4d0",
+                          "photo-1556909114-f6e7ad7d3136",
+                          "photo-1552321554-5fefe8c9ef14",
+                          "photo-1560518883-ce09059eeffa",
+                        ];
+                        return (
+                          <div
+                            key={i}
+                            className="w-14 h-14 rounded-xl overflow-hidden shrink-0 relative"
+                          >
+                            <img
+                              src={`https://images.unsplash.com/${interiorPhotos[i % interiorPhotos.length]}?w=100&q=80&fit=crop&auto=format`}
+                              alt={`Photo ${i + 1}`}
+                              className="absolute inset-0 w-full h-full object-cover"
+                            />
+                          </div>
+                        );
+                      })}
                       {visit.photosCount > 5 && (
                         <div className="w-14 h-14 rounded-xl bg-muted/40 border border-border flex items-center justify-center shrink-0">
-                          <span className="text-[10px] text-muted-foreground">+{visit.photosCount - 5}</span>
+                          <span className="text-[10px] text-muted-foreground font-medium">+{visit.photosCount - 5}</span>
                         </div>
                       )}
                     </div>
