@@ -16,13 +16,13 @@ interface PageHeaderProps {
 }
 
 const colorMap: Record<PageHeaderColor, { bg: string; accent: string }> = {
-  blue:   { bg: "from-blue-700 to-indigo-600",   accent: "text-blue-200/80" },
-  green:  { bg: "from-emerald-700 to-teal-600",  accent: "text-emerald-200/80" },
-  purple: { bg: "from-violet-700 to-purple-600", accent: "text-violet-200/80" },
-  rose:   { bg: "from-rose-700 to-pink-600",     accent: "text-rose-200/80" },
-  orange: { bg: "from-orange-600 to-amber-500",  accent: "text-orange-200/80" },
-  teal:   { bg: "from-teal-700 to-cyan-600",     accent: "text-teal-200/80" },
-  slate:  { bg: "from-slate-800 to-slate-600",   accent: "text-slate-200/80" },
+  blue:   { bg: "from-[#5956E9] to-[#4338ca]",  accent: "text-indigo-200/80" },
+  green:  { bg: "from-emerald-600 to-teal-500",  accent: "text-emerald-100/80" },
+  purple: { bg: "from-[#5956E9] to-[#7c3aed]",  accent: "text-violet-200/80" },
+  rose:   { bg: "from-rose-600 to-pink-500",     accent: "text-rose-100/80" },
+  orange: { bg: "from-orange-500 to-amber-400",  accent: "text-orange-100/80" },
+  teal:   { bg: "from-teal-600 to-cyan-500",     accent: "text-teal-100/80" },
+  slate:  { bg: "from-[#5956E9] to-[#4338ca]",  accent: "text-indigo-100/80" },
 };
 
 export function PageHeader({

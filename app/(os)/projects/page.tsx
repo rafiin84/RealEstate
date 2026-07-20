@@ -529,7 +529,7 @@ export default function ProjectsPage() {
   return (
     <div className="p-4 md:p-6 space-y-5 max-w-screen-2xl mx-auto">
       {/* ── Page Header ── */}
-      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-slate-800 to-slate-600 p-5 md:p-6 text-white">
+      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#5956E9] to-[#4338ca] p-5 md:p-6 text-white">
         <div className="absolute inset-0 opacity-15 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 85% 30%, rgba(255,255,255,0.9) 0%, transparent 55%)" }} />
         <div className="relative flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">

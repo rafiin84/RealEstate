@@ -15,21 +15,21 @@ interface KPICardProps {
 }
 
 const gradients = {
-  blue:   "from-blue-500 to-blue-700",
+  blue:   "from-[#5956E9] to-[#4338ca]",
   green:  "from-emerald-500 to-teal-600",
-  purple: "from-violet-500 to-purple-700",
-  orange: "from-orange-500 to-amber-600",
+  purple: "from-violet-500 to-purple-600",
+  orange: "from-orange-500 to-amber-500",
   rose:   "from-rose-500 to-pink-600",
-  teal:   "from-cyan-500 to-teal-600",
+  teal:   "from-cyan-500 to-teal-500",
 };
 
-const decorColors = {
-  blue:   "bg-blue-400/20",
-  green:  "bg-emerald-400/20",
-  purple: "bg-violet-400/20",
-  orange: "bg-orange-400/20",
-  rose:   "bg-rose-400/20",
-  teal:   "bg-cyan-400/20",
+const glows = {
+  blue:   "shadow-[#5956E9]/25",
+  green:  "shadow-emerald-500/20",
+  purple: "shadow-violet-500/20",
+  orange: "shadow-orange-500/20",
+  rose:   "shadow-rose-500/20",
+  teal:   "shadow-cyan-500/20",
 };
 
 export function KPICard({
@@ -47,27 +47,27 @@ export function KPICard({
 
   return (
     <div className={cn(
-      "relative overflow-hidden rounded-2xl p-5 text-white shadow-lg shadow-black/10",
+      "relative overflow-hidden rounded-2xl p-5 text-white shadow-lg",
       "bg-gradient-to-br",
       gradients[color],
+      glows[color],
       className
     )}>
-      {/* Decorative circles */}
-      <div className={cn("absolute -top-4 -right-4 w-24 h-24 rounded-full opacity-50", decorColors[color])} />
-      <div className={cn("absolute -bottom-6 -right-2 w-32 h-32 rounded-full opacity-30", decorColors[color])} />
+      {/* Decorative circle top-right */}
+      <div className="absolute -top-5 -right-5 w-24 h-24 rounded-full bg-white/10" />
+      <div className="absolute -bottom-8 -right-4 w-32 h-32 rounded-full bg-white/8" />
 
-      {/* Icon */}
-      <div className="relative flex items-start justify-between gap-3 mb-3">
-        <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center shrink-0">
+      {/* Top row: icon + change badge */}
+      <div className="relative flex items-start justify-between gap-2 mb-4">
+        <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
           <div className="w-5 h-5 text-white">{icon}</div>
         </div>
-        {/* Change badge */}
         <div className={cn(
-          "flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold backdrop-blur-sm",
+          "flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold",
           isNeutral
             ? "bg-white/15 text-white/80"
             : isPositive
-            ? "bg-white/20 text-white"
+            ? "bg-white/25 text-white"
             : "bg-black/20 text-white/90"
         )}>
           {isNeutral ? (
@@ -81,13 +81,11 @@ export function KPICard({
         </div>
       </div>
 
-      {/* Value */}
+      {/* Value + label */}
       <div className="relative">
-        <p className="text-2xl font-bold tracking-tight leading-none">{value}</p>
-        <p className="text-xs font-medium text-white/70 mt-1">{title}</p>
-        {subtitle && (
-          <p className="text-[11px] text-white/50 mt-0.5 truncate">{subtitle}</p>
-        )}
+        <p className="text-2xl font-extrabold tracking-tight leading-none">{value}</p>
+        <p className="text-xs font-semibold text-white/75 mt-1.5">{title}</p>
+        {subtitle && <p className="text-[11px] text-white/50 mt-0.5 truncate">{subtitle}</p>}
         <p className="text-[10px] text-white/40 mt-2">{changeLabel}</p>
       </div>
     </div>

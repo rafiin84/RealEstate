@@ -153,7 +153,7 @@ export default function BuyerDashboardPage() {
     <div className="p-5 md:p-6 space-y-6 max-w-7xl mx-auto">
 
       {/* ── Greeting ───────────────────────────────────────────────── */}
-      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-700 to-teal-600 p-5 md:p-6 text-white">
+      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#5956E9] to-[#7c3aed] p-5 md:p-6 text-white">
         <div className="absolute inset-0 opacity-15 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 90% 30%, rgba(255,255,255,0.9) 0%, transparent 55%)" }} />
         <div className="relative flex items-center justify-between gap-4">
           <div>

@@ -11,7 +11,6 @@ import {
   Search, Heart, FolderOpen, MapPin, FileText, Gift, User, ChevronLeft,
   ChevronRight, Building, ExternalLink, X,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import type { NavGroup } from "./nav-config";
 
@@ -38,23 +37,23 @@ export function Sidebar({ navGroups, variant = "os", mobileOpen = false, onMobil
     <aside
       className={cn(
         "flex flex-col h-full transition-all duration-300 sidebar-gradient",
-        collapsed ? "w-14" : "w-64"
+        collapsed ? "w-14" : "w-60"
       )}
     >
       {/* Logo */}
       <div className={cn(
-        "flex items-center gap-3 px-4 py-4 border-b border-white/5 shrink-0",
+        "flex items-center gap-2.5 px-4 py-5 shrink-0",
         collapsed && "justify-center px-0"
       )}>
-        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center shrink-0 shadow-lg shadow-emerald-500/30">
-          <Building className="w-4 h-4 text-white" />
+        <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center shrink-0 shadow-sm">
+          <Building className="w-4 h-4 text-[#5956E9]" />
         </div>
         {!collapsed && (
           <div className="flex flex-col min-w-0">
             <span className="text-[13px] font-bold text-white truncate leading-none">
               {variant === "os" ? "Godrej Properties" : "Buyer Portal"}
             </span>
-            <span className="text-[10px] text-white/40 leading-none mt-0.5 tracking-wide">
+            <span className="text-[10px] text-white/50 leading-none mt-0.5">
               {variant === "os" ? "Enterprise OS" : "My Home Journey"}
             </span>
           </div>
@@ -62,18 +61,18 @@ export function Sidebar({ navGroups, variant = "os", mobileOpen = false, onMobil
         {/* Mobile close */}
         <button
           onClick={onMobileClose}
-          className="ml-auto lg:hidden p-1 rounded-md text-white/40 hover:text-white hover:bg-white/5"
+          className="ml-auto lg:hidden p-1 rounded-md text-white/50 hover:text-white hover:bg-white/10"
         >
           <X className="w-4 h-4" />
         </button>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto scrollbar-hide py-3 px-2 space-y-5">
+      <nav className="flex-1 overflow-y-auto scrollbar-hide px-3 space-y-1 pb-4">
         {navGroups.map((group) => (
-          <div key={group.label}>
+          <div key={group.label} className="mb-1">
             {!collapsed && (
-              <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-white/30 px-2 mb-1.5">
+              <p className="text-[9px] font-bold uppercase tracking-[0.14em] text-white/35 px-2 py-2">
                 {group.label}
               </p>
             )}
@@ -87,33 +86,32 @@ export function Sidebar({ navGroups, variant = "os", mobileOpen = false, onMobil
                       href={item.href}
                       onClick={onMobileClose}
                       className={cn(
-                        "flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[13px] transition-all duration-150 group relative",
+                        "flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-medium transition-all duration-150 group",
                         isActive
-                          ? "bg-gradient-to-r from-indigo-500/25 to-violet-500/15 text-white font-medium shadow-sm"
-                          : "text-white/50 hover:text-white/85 hover:bg-white/5",
+                          ? "bg-white text-[#5956E9] shadow-sm"
+                          : "text-white/65 hover:text-white hover:bg-white/12",
                         collapsed && "justify-center px-0 w-10 mx-auto"
                       )}
                       title={collapsed ? item.label : undefined}
                     >
-                      {/* Active left accent */}
-                      {isActive && !collapsed && (
-                        <span className="absolute left-0 top-1.5 bottom-1.5 w-0.5 rounded-r-full bg-gradient-to-b from-indigo-400 to-violet-500" />
-                      )}
                       {Icon && (
                         <Icon className={cn(
-                          "w-4 h-4 shrink-0 transition-colors",
-                          isActive ? "text-indigo-300" : "text-white/35 group-hover:text-white/65"
+                          "w-4 h-4 shrink-0",
+                          isActive ? "text-[#5956E9]" : "text-white/55 group-hover:text-white"
                         )} />
                       )}
                       {!collapsed && (
-                        <>
-                          <span className="flex-1 truncate">{item.label}</span>
-                          {item.badge && (
-                            <Badge className="h-4 min-w-[18px] px-1 text-[10px] bg-indigo-500/30 text-indigo-200 border-0 font-medium">
-                              {item.badge}
-                            </Badge>
-                          )}
-                        </>
+                        <span className="flex-1 truncate">{item.label}</span>
+                      )}
+                      {!collapsed && item.badge && (
+                        <span className={cn(
+                          "text-[10px] font-bold px-1.5 py-0.5 rounded-full",
+                          isActive
+                            ? "bg-[#5956E9]/15 text-[#5956E9]"
+                            : "bg-white/20 text-white"
+                        )}>
+                          {item.badge}
+                        </span>
                       )}
                     </Link>
                   </li>
@@ -125,13 +123,16 @@ export function Sidebar({ navGroups, variant = "os", mobileOpen = false, onMobil
       </nav>
 
       {/* Footer */}
-      <div className={cn("border-t border-white/5 p-2 space-y-0.5 shrink-0", collapsed && "px-1")}>
+      <div className={cn(
+        "border-t border-white/10 p-3 space-y-0.5 shrink-0",
+        collapsed && "px-2"
+      )}>
         {variant === "os" && (
           <Link
             href="/buyer/dashboard"
             onClick={onMobileClose}
             className={cn(
-              "flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs text-white/40 hover:text-white/70 hover:bg-white/5 transition-colors",
+              "flex items-center gap-3 px-3 py-2 rounded-xl text-xs text-white/50 hover:text-white hover:bg-white/10 transition-colors",
               collapsed && "justify-center px-0 w-10 mx-auto"
             )}
           >
@@ -144,7 +145,7 @@ export function Sidebar({ navGroups, variant = "os", mobileOpen = false, onMobil
             href="/dashboard"
             onClick={onMobileClose}
             className={cn(
-              "flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs text-white/40 hover:text-white/70 hover:bg-white/5 transition-colors",
+              "flex items-center gap-3 px-3 py-2 rounded-xl text-xs text-white/50 hover:text-white hover:bg-white/10 transition-colors",
               collapsed && "justify-center px-0 w-10 mx-auto"
             )}
           >
@@ -155,7 +156,7 @@ export function Sidebar({ navGroups, variant = "os", mobileOpen = false, onMobil
         <button
           onClick={() => setCollapsed(!collapsed)}
           className={cn(
-            "w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs text-white/40 hover:text-white/70 hover:bg-white/5 transition-colors",
+            "w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs text-white/50 hover:text-white hover:bg-white/10 transition-colors",
             collapsed && "justify-center px-0 w-10 mx-auto"
           )}
         >
@@ -171,13 +172,13 @@ export function Sidebar({ navGroups, variant = "os", mobileOpen = false, onMobil
       {/* Mobile overlay backdrop */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
           onClick={onMobileClose}
         />
       )}
 
       {/* Desktop sidebar — always visible */}
-      <div className="hidden lg:flex h-full shrink-0 border-r border-white/5">
+      <div className="hidden lg:flex h-full shrink-0">
         {SidebarContent}
       </div>
 

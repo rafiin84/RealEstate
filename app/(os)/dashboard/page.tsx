@@ -217,7 +217,7 @@ export default function DashboardPage() {
       <div className="max-w-[1600px] mx-auto p-6 space-y-6">
 
         {/* ── Page Header ──────────────────────────────────────────────────── */}
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-blue-700 to-indigo-600 p-5 md:p-6 text-white">
+        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-[#5956E9] to-[#7c3aed] p-5 md:p-6 text-white">
           <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 80% 50%, #ffffff 0%, transparent 60%)" }} />
           <div className="relative flex items-start justify-between gap-4">
             <div>
