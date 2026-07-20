@@ -55,6 +55,7 @@ const projectMeta: Record<
     aiMatchScore: number;
     highlights: string[];
     amenityIcons: { icon: React.ReactNode; label: string }[];
+    image?: string;
   }
 > = {
   "proj-001": {
@@ -67,6 +68,7 @@ const projectMeta: Record<
     aiMatchScore: 92,
     highlights: ["Metro 800 m", "Top Schools", "62% Done"],
     amenityIcons: [],
+    image: "photo-1545324418-cc1a3fa10c00",
   },
   "proj-002": {
     developer: "Sobha Developers",
@@ -78,6 +80,7 @@ const projectMeta: Record<
     aiMatchScore: 65,
     highlights: ["Golf Course Road", "Ready to Move", "Private Pool"],
     amenityIcons: [],
+    image: "photo-1613977257363-707ba9348227",
   },
   "proj-003": {
     developer: "Godrej Properties",
@@ -89,6 +92,7 @@ const projectMeta: Record<
     aiMatchScore: 48,
     highlights: ["BKC Location", "Grade A Office", "Metro Access"],
     amenityIcons: [],
+    image: "photo-1486325212027-8081e485255e",
   },
   "proj-004": {
     developer: "Brigade Group",
@@ -100,6 +104,7 @@ const projectMeta: Record<
     aiMatchScore: 78,
     highlights: ["Near Airport", "Gated Township", "RERA Approved"],
     amenityIcons: [],
+    image: "photo-1500382017468-9049fed747ef",
   },
   "proj-005": {
     developer: "DLF Limited",
@@ -111,6 +116,7 @@ const projectMeta: Record<
     aiMatchScore: 55,
     highlights: ["GIFT City", "SEZ Benefits", "Smart Township"],
     amenityIcons: [],
+    image: "photo-1448630360428-65456885c650",
   },
 };
 
@@ -530,48 +536,49 @@ export default function DiscoverPage() {
                         key={project.id}
                         className="group relative bg-card border-border rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-lg transition-all duration-300"
                       >
-                        {/* ── Gradient Header ── */}
-                        <div
-                          className={`relative h-44 bg-gradient-to-br ${meta?.gradient ?? "from-primary/20 to-primary/10"} flex flex-col justify-between p-4`}
-                        >
-                          {/* Top row: type icon + RERA badge */}
-                          <div className="flex items-start justify-between">
-                            <div className="h-12 w-12 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center">
-                              {typeIconMap[project.type] ?? <Building2 className="h-8 w-8 text-white/80" />}
-                            </div>
-                            <div className="flex flex-col items-end gap-1.5">
-                              <Badge className="bg-white/15 backdrop-blur-sm text-white border-0 text-[10px] font-mono tracking-wide">
-                                RERA ✓
-                              </Badge>
-                              {meta && buyer && (
-                                <Badge className="bg-muted/60 backdrop-blur-sm border-0 text-[10px] font-semibold flex items-center gap-1">
-                                  <Sparkles className="h-2.5 w-2.5 text-yellow-400" />
-                                  <span className="text-yellow-300">{meta.aiMatchScore}% Match</span>
+                        {/* ── Photo Header ── */}
+                        <div className="relative h-44 overflow-hidden">
+                          <img
+                            src={`https://images.unsplash.com/${meta?.image ?? "photo-1545324418-cc1a3fa10c00"}?w=600&q=80&fit=crop&auto=format`}
+                            alt={project.name}
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/10" />
+                          <div className="relative flex flex-col justify-between h-full p-4">
+                            {/* Top row: type icon + RERA badge */}
+                            <div className="flex items-start justify-between">
+                              <div className="h-12 w-12 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center">
+                                {typeIconMap[project.type] ?? <Building2 className="h-8 w-8 text-white/80" />}
+                              </div>
+                              <div className="flex flex-col items-end gap-1.5">
+                                <Badge className="bg-white/15 backdrop-blur-sm text-white border-0 text-[10px] font-mono tracking-wide">
+                                  RERA ✓
                                 </Badge>
+                                {meta && buyer && (
+                                  <Badge className="bg-black/30 backdrop-blur-sm border-0 text-[10px] font-semibold flex items-center gap-1">
+                                    <Sparkles className="h-2.5 w-2.5 text-yellow-400" />
+                                    <span className="text-yellow-300">{meta.aiMatchScore}% Match</span>
+                                  </Badge>
+                                )}
+                              </div>
+                            </div>
+
+                            {/* Bottom: project name + status badge */}
+                            <div>
+                              <div className="mb-2">
+                                <Badge
+                                  className={`border text-[10px] px-2 py-0 ${statusColor[project.status] ?? "bg-muted text-muted-foreground border-border"}`}
+                                >
+                                  {project.status}
+                                </Badge>
+                              </div>
+                              <h3 className="text-lg font-bold text-white leading-tight drop-shadow-sm">
+                                {project.name}
+                              </h3>
+                              {meta && (
+                                <p className="text-white/70 text-xs mt-0.5">{meta.developer}</p>
                               )}
                             </div>
-                          </div>
-
-                          {/* Bottom: project name + status badge */}
-                          <div>
-                            <div className="mb-2">
-                              <Badge
-                                className={`border text-[10px] px-2 py-0 ${statusColor[project.status] ?? "bg-muted text-muted-foreground border-border"}`}
-                              >
-                                {project.status}
-                              </Badge>
-                            </div>
-                            <h3 className="text-lg font-bold text-white leading-tight drop-shadow-sm">
-                              {project.name}
-                            </h3>
-                            {meta && (
-                              <p className="text-white/70 text-xs mt-0.5">{meta.developer}</p>
-                            )}
-                          </div>
-
-                          {/* Save / Compare overlay buttons */}
-                          <div className="absolute top-3 right-3 flex flex-col gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                            {/* shown on hover but RERA/match badges are always visible — shift these */}
                           </div>
                         </div>
 

@@ -46,6 +46,7 @@ const projectMeta: Record<
     highlights: string[];
     beds?: string;
     constructionProgress?: number;
+    image?: string;
   }
 > = {
   "proj-001": {
@@ -58,6 +59,7 @@ const projectMeta: Record<
     highlights: ["Metro 800 m", "Top Schools Nearby", "62% Done"],
     beds: "2–4",
     constructionProgress: 62,
+    image: "photo-1545324418-cc1a3fa10c00",
   },
   "proj-002": {
     developer: "Sobha Developers",
@@ -69,6 +71,7 @@ const projectMeta: Record<
     highlights: ["Golf Course Road", "Ready to Move", "Private Pool"],
     beds: "4–5",
     constructionProgress: 100,
+    image: "photo-1613977257363-707ba9348227",
   },
   "proj-003": {
     developer: "Godrej Properties",
@@ -79,6 +82,7 @@ const projectMeta: Record<
     aiMatchScore: 48,
     highlights: ["BKC Location", "Grade A Office", "Metro Access"],
     constructionProgress: 45,
+    image: "photo-1486325212027-8081e485255e",
   },
   "proj-004": {
     developer: "Brigade Group",
@@ -89,6 +93,7 @@ const projectMeta: Record<
     aiMatchScore: 78,
     highlights: ["Near Airport", "Gated Township", "RERA Approved"],
     constructionProgress: 20,
+    image: "photo-1500382017468-9049fed747ef",
   },
   "proj-005": {
     developer: "DLF Limited",
@@ -100,6 +105,7 @@ const projectMeta: Record<
     highlights: ["GIFT City", "SEZ Benefits", "Smart Township"],
     beds: "1–3",
     constructionProgress: 30,
+    image: "photo-1448630360428-65456885c650",
   },
 };
 
@@ -283,8 +289,15 @@ function CompareModal({
             const meta = projectMeta[proj.id];
             return (
               <div key={proj.id} className="p-4 border-l border-border">
-                <div className={`h-16 rounded-xl bg-gradient-to-br ${meta?.gradient ?? "from-primary/20 to-primary/10"} flex items-center justify-center mb-3`}>
-                  {typeIconMap[proj.type] ?? <Building2 className="w-8 h-8 text-white/80" />}
+                <div className="relative h-16 rounded-xl overflow-hidden mb-3">
+                  <img
+                    src={`https://images.unsplash.com/${meta?.image ?? "photo-1545324418-cc1a3fa10c00"}?w=300&q=80&fit=crop&auto=format`}
+                    alt={proj.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                    {typeIconMap[proj.type] ?? <Building2 className="w-8 h-8 text-white/80" />}
+                  </div>
                 </div>
                 <p className="text-sm font-semibold text-foreground leading-tight">{proj.name}</p>
                 <p className="text-[11px] text-muted-foreground mt-0.5">{meta?.developer}</p>
@@ -439,35 +452,40 @@ export default function SavedPage() {
                     isComparing ? "border-sky-500/40" : "border-border hover:border-primary/25"
                   }`}
                 >
-                  {/* ── Gradient header ── */}
-                  <div
-                    className={`relative h-40 bg-gradient-to-br ${meta?.gradient ?? "from-primary/20 to-primary/10"} flex flex-col justify-between p-4`}
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="h-11 w-11 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center">
-                        {typeIconMap[project.type] ?? <Building2 className="w-7 h-7 text-white/80" />}
-                      </div>
-                      <div className="flex flex-col items-end gap-1.5">
-                        <Badge className="bg-white/15 backdrop-blur-sm text-white border-0 text-[10px] font-mono tracking-wide">
-                          RERA
-                        </Badge>
-                        {meta && (
-                          <Badge className="bg-muted/60 backdrop-blur-sm border-0 text-[10px] font-semibold flex items-center gap-1">
-                            <Sparkles className="w-2.5 h-2.5 text-yellow-400" />
-                            <span className="text-yellow-300">{meta.aiMatchScore}%</span>
+                  {/* ── Photo header ── */}
+                  <div className="relative h-40 overflow-hidden">
+                    <img
+                      src={`https://images.unsplash.com/${meta?.image ?? "photo-1545324418-cc1a3fa10c00"}?w=600&q=80&fit=crop&auto=format`}
+                      alt={project.name}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/10" />
+                    <div className="relative flex flex-col justify-between h-full p-4">
+                      <div className="flex items-start justify-between">
+                        <div className="h-11 w-11 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center">
+                          {typeIconMap[project.type] ?? <Building2 className="w-7 h-7 text-white/80" />}
+                        </div>
+                        <div className="flex flex-col items-end gap-1.5">
+                          <Badge className="bg-white/15 backdrop-blur-sm text-white border-0 text-[10px] font-mono tracking-wide">
+                            RERA
                           </Badge>
-                        )}
+                          {meta && (
+                            <Badge className="bg-black/30 backdrop-blur-sm border-0 text-[10px] font-semibold flex items-center gap-1">
+                              <Sparkles className="w-2.5 h-2.5 text-yellow-400" />
+                              <span className="text-yellow-300">{meta.aiMatchScore}%</span>
+                            </Badge>
+                          )}
+                        </div>
                       </div>
-                    </div>
-
-                    <div>
-                      <Badge
-                        className={`border text-[10px] px-2 py-0 mb-2 ${statusColor[project.status] ?? "bg-muted text-muted-foreground border-border"}`}
-                      >
-                        {project.status}
-                      </Badge>
-                      <h3 className="text-base font-bold text-white leading-tight drop-shadow-sm">{project.name}</h3>
-                      {meta && <p className="text-white/70 text-xs mt-0.5">{meta.developer}</p>}
+                      <div>
+                        <Badge
+                          className={`border text-[10px] px-2 py-0 mb-2 ${statusColor[project.status] ?? "bg-muted text-muted-foreground border-border"}`}
+                        >
+                          {project.status}
+                        </Badge>
+                        <h3 className="text-base font-bold text-white leading-tight drop-shadow-sm">{project.name}</h3>
+                        {meta && <p className="text-white/70 text-xs mt-0.5">{meta.developer}</p>}
+                      </div>
                     </div>
                   </div>
 

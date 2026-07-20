@@ -65,6 +65,7 @@ const matchedProperties = [
     status: "Under Construction",
     statusColor: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
     coverAccent: "bg-primary/8",
+    image: "photo-1545324418-cc1a3fa10c00",
   },
   {
     id: "proj-004",
@@ -83,6 +84,7 @@ const matchedProperties = [
     status: "Planning",
     statusColor: "bg-sky-100 text-sky-700",
     coverAccent: "bg-emerald-500/8",
+    image: "photo-1500382017468-9049fed747ef",
   },
   {
     id: "proj-002",
@@ -101,6 +103,7 @@ const matchedProperties = [
     status: "Ready to Move",
     statusColor: "bg-emerald-100 text-emerald-700",
     coverAccent: "bg-amber-500/8",
+    image: "photo-1613977257363-707ba9348227",
   },
 ];
 
@@ -252,13 +255,21 @@ export default function BuyerDashboardPage() {
                     <CardContent className="p-0">
                       <div className="flex">
                         {/* Cover image area */}
-                        <div className={`w-32 md:w-40 shrink-0 ${prop.coverAccent} flex flex-col items-center justify-center gap-2 relative min-h-[120px]`}>
-                          <div className={`w-12 h-12 rounded-2xl ${prop.bgColor} flex items-center justify-center ring-1 ring-white/10`}>
-                            <Icon className={`w-6 h-6 ${prop.iconColor}`} />
+                        <div className="w-32 md:w-40 shrink-0 relative min-h-[120px] overflow-hidden">
+                          <img
+                            src={`https://images.unsplash.com/${prop.image}?w=300&q=80&fit=crop&auto=format`}
+                            alt={prop.name}
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-black/20" />
+                          <div className="relative flex flex-col items-center justify-center gap-2 h-full">
+                            <div className={`w-12 h-12 rounded-2xl ${prop.bgColor} flex items-center justify-center`}>
+                              <Icon className={`w-6 h-6 ${prop.iconColor}`} />
+                            </div>
+                            <Badge className={`text-[9px] px-1.5 py-0 h-4 border-0 ${prop.statusColor}`}>
+                              {prop.status}
+                            </Badge>
                           </div>
-                          <Badge className={`text-[9px] px-1.5 py-0 h-4 border-0 ${prop.statusColor}`}>
-                            {prop.status}
-                          </Badge>
                         </div>
 
                         {/* Content */}
