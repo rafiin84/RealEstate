@@ -153,23 +153,20 @@ export default function BuyerDashboardPage() {
     <div className="p-5 md:p-6 space-y-6 max-w-7xl mx-auto">
 
       {/* ── Greeting ───────────────────────────────────────────────── */}
-      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-primary to-violet-500 p-5 md:p-6 text-white">
-        <div className="absolute inset-0 opacity-15 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 90% 30%, rgba(255,255,255,0.9) 0%, transparent 55%)" }} />
-        <div className="relative flex items-center justify-between gap-4">
-          <div>
-            <div className="text-[10px] font-bold uppercase tracking-wider text-emerald-200/70 mb-1">My Home Journey</div>
-            <h1 className="text-xl md:text-2xl font-bold tracking-tight">
-              Good morning, Ramesh 👋
-            </h1>
-            <p className="text-sm text-emerald-100/70 mt-1">
-              Sunday, July 20, 2026 · Your dream home is closer than you think
-            </p>
-          </div>
-          <Button size="sm" className="gap-1.5 shrink-0 bg-white/15 border border-white/20 text-white hover:bg-white/25">
-            <Phone className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Talk to Advisor</span>
-          </Button>
+      <div className="flex items-center justify-between gap-4">
+        <div>
+          <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest">My Home Journey</p>
+          <h1 className="text-xl md:text-2xl font-bold text-foreground mt-0.5">
+            Good morning, Ramesh! 👋
+          </h1>
+          <p className="text-sm text-muted-foreground mt-0.5">
+            Your dream home is closer than you think
+          </p>
         </div>
+        <Button size="sm" className="gap-1.5 shrink-0 h-9 rounded-full bg-primary hover:bg-primary/90 text-white">
+          <Phone className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">Talk to Advisor</span>
+        </Button>
       </div>
 
       {/* ── AI Buyer Persona ────────────────────────────────────────── */}

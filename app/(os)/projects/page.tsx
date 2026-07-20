@@ -529,24 +529,20 @@ export default function ProjectsPage() {
   return (
     <div className="p-4 md:p-6 space-y-5 max-w-screen-2xl mx-auto">
       {/* ── Page Header ── */}
-      <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-primary to-violet-500 p-5 md:p-6 text-white">
-        <div className="absolute inset-0 opacity-15 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 85% 30%, rgba(255,255,255,0.9) 0%, transparent 55%)" }} />
-        <div className="relative flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="hidden sm:flex w-10 h-10 rounded-xl bg-white/15 items-center justify-center shrink-0">
-              <Layers className="w-5 h-5" />
-            </div>
-            <div>
-              <div className="text-[10px] font-bold uppercase tracking-wider text-white/60 mb-0.5">Project Portfolio</div>
-              <h1 className="text-lg md:text-xl font-bold">Projects <span className="text-white/60 text-base font-medium">({projects.length})</span></h1>
-              <p className="text-sm text-white/60 mt-0.5">Manage and track all Godrej Properties developments</p>
-            </div>
-          </div>
-          <Button size="sm" className="gap-1.5 h-8 bg-white/15 border border-white/20 text-white hover:bg-white/25">
-            <Plus className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">New Project</span>
-          </Button>
+      <div className="flex items-center justify-between gap-4">
+        <div>
+          <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest">Project Portfolio</p>
+          <h1 className="text-xl md:text-2xl font-bold text-foreground mt-0.5">
+            Projects <span className="text-muted-foreground font-normal text-lg">({projects.length})</span>
+          </h1>
+          <p className="text-sm text-muted-foreground mt-0.5">Manage and track all Godrej Properties developments</p>
         </div>
+        <Button size="sm" className="gap-1.5 h-9 rounded-full bg-primary hover:bg-primary/90 text-white">
+          <Plus className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">New Project</span>
+        </Button>
+      </div>
+      <div className="hidden"> {/* keep layout consistent */}
       </div>
 
       {/* ── KPI Row ── */}

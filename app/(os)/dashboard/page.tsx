@@ -216,31 +216,28 @@ export default function DashboardPage() {
     <div className="min-h-full bg-background">
       <div className="max-w-[1600px] mx-auto p-6 space-y-6">
 
-        {/* ── Page Header ──────────────────────────────────────────────────── */}
-        <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-primary to-violet-500 p-5 md:p-6 text-white">
-          <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle at 85% 40%, #fff 0%, transparent 55%)" }} />
-          <div className="relative flex items-start justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <Sparkles className="w-3.5 h-3.5 text-white/70" />
-                <span className="text-[11px] font-semibold text-white/70 uppercase tracking-wider">Executive Dashboard</span>
-              </div>
-              <h1 className="text-xl md:text-2xl font-bold">Godrej Properties</h1>
-              <div className="flex items-center gap-2 mt-1">
-                <Calendar className="w-3.5 h-3.5 text-white/60" />
-                <p className="text-sm text-white/70">July 20, 2026 · FY 2026–27</p>
-              </div>
+        {/* ── Page Header — clean white like reference ─────────────────────── */}
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-widest flex items-center gap-1.5">
+              <Sparkles className="w-3 h-3 text-primary" />
+              Executive Dashboard
+            </p>
+            <h1 className="text-xl md:text-2xl font-bold text-foreground mt-0.5">Godrej Properties</h1>
+            <div className="flex items-center gap-2 mt-1">
+              <Calendar className="w-3.5 h-3.5 text-muted-foreground" />
+              <p className="text-sm text-muted-foreground">July 21, 2026 · FY 2026–27</p>
             </div>
-            <div className="flex items-center gap-2 shrink-0">
-              <Button variant="outline" size="sm" className="gap-1.5 h-8 text-xs bg-white/15 border-white/25 text-white hover:bg-white/25">
-                <Download className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Export</span>
-              </Button>
-              <Button size="sm" className="gap-1.5 h-8 text-xs bg-white text-primary hover:bg-white/90 font-semibold">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">AI Report</span>
-              </Button>
-            </div>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <Button variant="outline" size="sm" className="gap-1.5 h-9 text-xs rounded-full">
+              <Download className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Export</span>
+            </Button>
+            <Button size="sm" className="gap-1.5 h-9 text-xs rounded-full bg-primary hover:bg-primary/90">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">AI Report</span>
+            </Button>
           </div>
         </div>
 

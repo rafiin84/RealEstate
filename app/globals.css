@@ -47,87 +47,87 @@
   --radius-3xl: calc(var(--radius) * 2.2);
 }
 
-/* ── Light mode ─────────────────────────────────────────────────────────────── */
+/* ── Light mode — Dropify white theme ─────────────────────────────────────── */
 :root {
-  /* Body — very light lavender-gray (matches Dropify reference exactly) */
-  --background: #EDE8F5;
+  /* Pure white body */
+  --background: #f8f7ff;
   --foreground: #1a1a2e;
 
-  /* Cards — pure white */
+  /* White cards */
   --card: #ffffff;
   --card-foreground: #1a1a2e;
   --popover: #ffffff;
   --popover-foreground: #1a1a2e;
 
-  /* Primary — medium purple accent (used sparingly) */
-  --primary: #7C6FF7;
+  /* Purple — used ONLY as accent/active state */
+  --primary: #7B71F5;
   --primary-foreground: #ffffff;
 
-  --secondary: #f0eeff;
-  --secondary-foreground: #5046e5;
-  --muted: #f4f2fb;
-  --muted-foreground: #9492b0;
-  --accent: #ede9fe;
-  --accent-foreground: #7C6FF7;
+  --secondary: #f2f0fe;
+  --secondary-foreground: #5b53e8;
+  --muted: #f5f4fc;
+  --muted-foreground: #9898b5;
+  --accent: #eeecfe;
+  --accent-foreground: #7B71F5;
   --destructive: #ef4444;
 
-  --border: #e8e5f5;
-  --input: #ede9f9;
-  --ring: #7C6FF7;
+  /* Very subtle borders */
+  --border: #eeecf8;
+  --input: #f0eef9;
+  --ring: #7B71F5;
 
-  --chart-1: #7C6FF7;
-  --chart-2: #06b6d4;
+  --chart-1: #7B71F5;
+  --chart-2: #a89dfa;
   --chart-3: #10b981;
   --chart-4: #f59e0b;
   --chart-5: #ec4899;
 
-  --radius: 0.75rem;
+  --radius: 0.875rem;
 
-  /* Sidebar — WHITE (like the Dropify reference) */
+  /* Sidebar — white, exactly like the reference */
   --sidebar: #ffffff;
-  --sidebar-foreground: #6b6b8a;
-  --sidebar-primary: #7C6FF7;
+  --sidebar-foreground: #72728f;
+  --sidebar-primary: #7B71F5;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f0eeff;
-  --sidebar-accent-foreground: #7C6FF7;
-  --sidebar-border: #ede9f5;
-  --sidebar-ring: #7C6FF7;
+  --sidebar-accent: #f2f0fe;
+  --sidebar-accent-foreground: #7B71F5;
+  --sidebar-border: #f0eef9;
+  --sidebar-ring: #7B71F5;
 }
 
 /* ── Dark mode ─────────────────────────────────────────────────────────────── */
 .dark {
-  --background: #0f0f1a;
-  --foreground: #e8e6f8;
-  --card: #17172a;
-  --card-foreground: #e8e6f8;
-  --popover: #17172a;
-  --popover-foreground: #e8e6f8;
-  --primary: #9490fa;
+  --background: #0e0e1a;
+  --foreground: #eae9f8;
+  --card: #16162a;
+  --card-foreground: #eae9f8;
+  --popover: #16162a;
+  --popover-foreground: #eae9f8;
+  --primary: #9590f9;
   --primary-foreground: #ffffff;
-  --secondary: #1e1c35;
-  --secondary-foreground: #c4c1f5;
-  --muted: #1a1830;
-  --muted-foreground: #7a78a0;
-  --accent: #1e1c35;
-  --accent-foreground: #9490fa;
+  --secondary: #1c1c32;
+  --secondary-foreground: #c0bdf5;
+  --muted: #181830;
+  --muted-foreground: #7878a0;
+  --accent: #1c1c32;
+  --accent-foreground: #9590f9;
   --destructive: #f87171;
-  --border: rgba(255,255,255,0.07);
-  --input: rgba(255,255,255,0.09);
-  --ring: #9490fa;
-  --chart-1: #9490fa;
-  --chart-2: #22d3ee;
+  --border: rgba(255,255,255,0.06);
+  --input: rgba(255,255,255,0.08);
+  --ring: #9590f9;
+  --chart-1: #9590f9;
+  --chart-2: #c4beff;
   --chart-3: #4ade80;
   --chart-4: #fbbf24;
   --chart-5: #f472b6;
-  /* Dark sidebar — dark purple */
-  --sidebar: #17172a;
-  --sidebar-foreground: #7a78a0;
-  --sidebar-primary: #9490fa;
+  --sidebar: #13132a;
+  --sidebar-foreground: #7878a0;
+  --sidebar-primary: #9590f9;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1e1c35;
-  --sidebar-accent-foreground: #9490fa;
-  --sidebar-border: rgba(255,255,255,0.06);
-  --sidebar-ring: #9490fa;
+  --sidebar-accent: #1c1c32;
+  --sidebar-accent-foreground: #9590f9;
+  --sidebar-border: rgba(255,255,255,0.05);
+  --sidebar-ring: #9590f9;
 }
 
 @layer base {
@@ -142,16 +142,10 @@
     scrollbar-width: none;
   }
   .scrollbar-hide::-webkit-scrollbar { display: none; }
-
-  /* Sidebar — white (light mode) */
-  .sidebar-surface {
-    background: var(--sidebar);
-    border-right: 1px solid var(--sidebar-border);
-  }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar { width: 5px; height: 5px; }
+/* Thin, refined scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(124,111,247,0.18); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(124,111,247,0.35); }
+::-webkit-scrollbar-thumb { background: rgba(123,113,245,0.15); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(123,113,245,0.30); }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Bell, Search, Moon, Sun, ChevronDown, Settings, LogOut, User, HelpCircle, Menu } from "lucide-react";
+import { Bell, Search, Moon, Sun, MessageSquare, Menu, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Settings, LogOut, User, HelpCircle, ChevronDown } from "lucide-react";
 import { CommandPalette } from "./command-palette";
 
 interface HeaderProps {
@@ -29,78 +30,73 @@ export function Header({ variant = "os", onMenuClick }: HeaderProps) {
 
   return (
     <>
-      <header className="h-16 border-b border-border bg-card flex items-center px-5 shrink-0 z-20 gap-4">
+      <header className="h-[70px] border-b border-border bg-card flex items-center px-6 shrink-0 z-20 gap-4">
+
         {/* Hamburger — mobile only */}
         <button
           onClick={onMenuClick}
-          className="lg:hidden w-9 h-9 rounded-xl bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors shrink-0"
+          className="lg:hidden w-9 h-9 rounded-xl bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground shrink-0"
         >
           <Menu className="w-4 h-4" />
         </button>
 
         {/* Welcome text */}
         <div className="hidden md:block min-w-0">
-          <p className="text-base font-bold text-foreground leading-none">
+          <p className="text-[16px] font-bold text-foreground leading-tight">
             {variant === "os" ? "Welcome back, Rahul!" : "Welcome back, Ramesh!"}
           </p>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            {variant === "os" ? "Godrej Properties Enterprise" : "Buyer Portal"}
+          <p className="text-[12px] text-muted-foreground">
+            {variant === "os"
+              ? "You have 3 new leads assigned today."
+              : "Your site visit is scheduled for tomorrow."}
           </p>
         </div>
 
         {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Search bar */}
-        <button
-          onClick={() => setCommandOpen(true)}
-          className="hidden sm:flex items-center gap-2.5 px-4 h-9 rounded-2xl bg-muted border border-border text-xs text-muted-foreground hover:border-primary/30 hover:text-foreground transition-all w-56 lg:w-72"
-        >
-          <Search className="w-3.5 h-3.5 shrink-0" />
-          <span className="flex-1 text-left">Search anything...</span>
-          <kbd className="hidden lg:inline text-[10px] bg-card border border-border rounded-md px-1.5 py-0.5 font-mono">⌘K</kbd>
-        </button>
-
-        {/* Actions */}
-        <div className="flex items-center gap-1.5">
-          {/* Mobile search */}
+        {/* Icon buttons — dark circles like reference */}
+        <div className="flex items-center gap-2">
           <button
             onClick={() => setCommandOpen(true)}
-            className="sm:hidden w-9 h-9 rounded-xl bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground"
+            className="w-10 h-10 rounded-full bg-foreground/90 dark:bg-foreground/10 flex items-center justify-center text-white dark:text-foreground hover:opacity-80 transition-opacity"
           >
             <Search className="w-4 h-4" />
           </button>
 
-          {/* Dark mode */}
-          <button
-            onClick={toggleDark}
-            className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {dark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
-
-          {/* Notifications */}
           <div className="relative">
-            <button className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
+            <button className="w-10 h-10 rounded-full bg-foreground/90 dark:bg-foreground/10 flex items-center justify-center text-white dark:text-foreground hover:opacity-80 transition-opacity">
               <Bell className="w-4 h-4" />
             </button>
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-card" />
+            <span className="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-card" />
           </div>
 
-          {/* Divider */}
-          <div className="w-px h-6 bg-border mx-1" />
+          <button
+            onClick={toggleDark}
+            className="w-10 h-10 rounded-full bg-foreground/90 dark:bg-foreground/10 flex items-center justify-center text-white dark:text-foreground hover:opacity-80 transition-opacity"
+          >
+            {dark ? <Sun className="w-4 h-4" /> : <MessageSquare className="w-4 h-4" />}
+          </button>
 
-          {/* User menu */}
+          {/* Purple CTA — "Create Report" like "Create new order" */}
+          <Button
+            className="h-10 px-5 rounded-full bg-primary text-white font-semibold text-[13px] hover:bg-primary/90 hidden sm:flex gap-2"
+          >
+            <Plus className="w-4 h-4" />
+            <span className="hidden md:inline">
+              {variant === "os" ? "Add Project" : "Schedule Visit"}
+            </span>
+          </Button>
+
+          <div className="w-px h-7 bg-border mx-1" />
+
+          {/* User avatar */}
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-2.5 pl-1 pr-2 py-1 rounded-2xl hover:bg-muted transition-colors cursor-pointer border-0 bg-transparent">
-              <Avatar className="w-8 h-8">
-                <AvatarFallback className="text-[11px] font-bold bg-primary/15 text-primary">RK</AvatarFallback>
+            <DropdownMenuTrigger className="flex items-center gap-2 cursor-pointer border-0 bg-transparent rounded-2xl hover:bg-muted/50 px-1 py-1 transition-colors">
+              <Avatar className="w-9 h-9">
+                <AvatarFallback className="text-[12px] font-bold bg-primary/10 text-primary">RK</AvatarFallback>
               </Avatar>
-              <div className="hidden md:flex flex-col items-start leading-none">
-                <span className="text-[12px] font-semibold text-foreground">Rahul Khanna</span>
-                <span className="text-[10px] text-muted-foreground">Sales Manager</span>
-              </div>
-              <ChevronDown className="w-3.5 h-3.5 text-muted-foreground hidden md:block" />
+              <ChevronDown className="w-3.5 h-3.5 text-muted-foreground hidden sm:block" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-52">
               <div className="px-3 py-2.5 border-b border-border">

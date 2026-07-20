@@ -1,7 +1,8 @@
 "use client";
 
-import { TrendingUp, TrendingDown, Minus } from "lucide-react";
+import { TrendingUp, TrendingDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { BarChart, Bar, ResponsiveContainer } from "recharts";
 
 interface KPICardProps {
   title: string;
@@ -11,68 +12,72 @@ interface KPICardProps {
   changeLabel?: string;
   icon: React.ReactNode;
   color?: "blue" | "green" | "orange" | "purple" | "rose" | "teal";
+  sparkData?: number[];
   className?: string;
 }
 
-/* Light-tinted card style — matches Dropify reference */
-const colorTokens = {
-  blue:   { icon: "bg-primary/10 text-primary",           change: "text-primary",          dot: "bg-primary" },
-  green:  { icon: "bg-emerald-100 text-emerald-600",       change: "text-emerald-600",      dot: "bg-emerald-500" },
-  purple: { icon: "bg-violet-100 text-violet-600",         change: "text-violet-600",       dot: "bg-violet-500" },
-  orange: { icon: "bg-orange-100 text-orange-600",         change: "text-orange-600",       dot: "bg-orange-500" },
-  rose:   { icon: "bg-rose-100 text-rose-600",             change: "text-rose-600",         dot: "bg-rose-500" },
-  teal:   { icon: "bg-cyan-100 text-cyan-600",             change: "text-cyan-600",         dot: "bg-cyan-500" },
-};
+/* Inline mini sparkline data fallback */
+const defaultSpark = [3, 5, 4, 6, 5, 8, 7, 9, 8, 10, 9, 12];
 
 export function KPICard({
   title,
   value,
   subtitle,
   change,
-  changeLabel = "vs last period",
+  changeLabel = "vs last month",
   icon,
-  color = "blue",
+  sparkData,
   className,
 }: KPICardProps) {
-  const isPositive = change > 0;
-  const isNeutral = change === 0;
-  const t = colorTokens[color];
+  const isPositive = change >= 0;
+  const data = (sparkData ?? defaultSpark).map((v) => ({ v }));
 
   return (
     <div className={cn(
-      "bg-card rounded-2xl p-5 border border-border",
-      "shadow-[0_2px_8px_rgba(124,111,247,0.06)]",
-      "hover:shadow-[0_4px_16px_rgba(124,111,247,0.10)] transition-shadow duration-200",
+      "bg-white dark:bg-card rounded-2xl p-5 border border-border",
+      "shadow-[0_1px_4px_rgba(0,0,0,0.04),0_4px_16px_rgba(123,113,245,0.05)]",
+      "hover:shadow-[0_2px_8px_rgba(0,0,0,0.06),0_8px_24px_rgba(123,113,245,0.08)] transition-shadow duration-200",
+      "flex items-center justify-between gap-4",
       className
     )}>
-      {/* Top row: icon + change */}
-      <div className="flex items-start justify-between gap-2 mb-4">
-        <div className={cn("w-10 h-10 rounded-xl flex items-center justify-center shrink-0", t.icon)}>
-          <div className="w-5 h-5">{icon}</div>
+      {/* Left: icon + value */}
+      <div className="flex items-center gap-4 min-w-0">
+        {/* Dark circle icon — like the reference */}
+        <div className="w-11 h-11 rounded-full bg-foreground dark:bg-muted flex items-center justify-center shrink-0">
+          <div className="w-5 h-5 text-white dark:text-foreground/80">{icon}</div>
         </div>
-        <div className={cn(
-          "flex items-center gap-1 text-[11px] font-semibold px-2 py-1 rounded-full",
-          isNeutral
-            ? "bg-muted text-muted-foreground"
-            : isPositive
-            ? "bg-emerald-50 text-emerald-600"
-            : "bg-rose-50 text-rose-600"
-        )}>
-          {isNeutral
-            ? <Minus className="w-3 h-3" />
-            : isPositive
-            ? <TrendingUp className="w-3 h-3" />
-            : <TrendingDown className="w-3 h-3" />
-          }
-          <span>{isNeutral ? "—" : `${isPositive ? "+" : ""}${change}%`}</span>
+        <div className="min-w-0">
+          <p className="text-[11px] font-medium text-muted-foreground truncate">{title}</p>
+          <div className="flex items-baseline gap-2 mt-0.5">
+            <p className="text-2xl font-extrabold text-foreground tracking-tight leading-none">{value}</p>
+            <span className={cn(
+              "flex items-center gap-0.5 text-[11px] font-semibold",
+              isPositive ? "text-emerald-500" : "text-rose-500"
+            )}>
+              {isPositive
+                ? <TrendingUp className="w-3 h-3" />
+                : <TrendingDown className="w-3 h-3" />
+              }
+              {isPositive ? "+" : ""}{change}%
+            </span>
+          </div>
+          {subtitle && <p className="text-[10px] text-muted-foreground/60 mt-0.5 truncate">{subtitle}</p>}
         </div>
       </div>
 
-      {/* Value */}
-      <p className="text-2xl font-extrabold text-foreground tracking-tight leading-none">{value}</p>
-      <p className="text-xs font-medium text-muted-foreground mt-1.5">{title}</p>
-      {subtitle && <p className="text-[11px] text-muted-foreground/60 mt-0.5 truncate">{subtitle}</p>}
-      <p className="text-[10px] text-muted-foreground/50 mt-2">{changeLabel}</p>
+      {/* Right: sparkline bars — like the mini bar charts in reference */}
+      <div className="w-20 h-10 shrink-0">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={data} barSize={4} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+            <Bar
+              dataKey="v"
+              radius={[2, 2, 0, 0]}
+              fill="#c4beff"
+              /* last bar gets darker purple like reference */
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }
