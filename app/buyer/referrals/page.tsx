@@ -76,7 +76,7 @@ const referredFriends: {
 const statusConfig: Record<ReferralStatus, { label: string; color: string; icon: React.ReactNode }> = {
   registered: {
     label: "Registered",
-    color: "bg-slate-500/15 text-slate-400 border-slate-600/30",
+    color: "bg-muted text-muted-foreground border-border",
     icon: <UserPlus className="w-3 h-3" />,
   },
   visiting: {
@@ -86,7 +86,7 @@ const statusConfig: Record<ReferralStatus, { label: string; color: string; icon:
   },
   booked: {
     label: "Booking Done",
-    color: "bg-violet-500/15 text-violet-400 border-violet-500/30",
+    color: "bg-primary/10 text-primary border-primary/20",
     icon: <Home className="w-3 h-3" />,
   },
   rewarded: {
@@ -116,16 +116,16 @@ function ShareModal({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-      <div className="w-full max-w-md rounded-2xl bg-[#12121f] border border-white/10 shadow-2xl">
-        <div className="flex items-center justify-between p-5 border-b border-white/8">
-          <h2 className="text-base font-semibold text-white flex items-center gap-2">
-            <Share2 className="w-4 h-4 text-violet-400" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/50 backdrop-blur-sm p-4">
+      <div className="w-full max-w-md rounded-2xl bg-card border border-border shadow-2xl">
+        <div className="flex items-center justify-between p-5 border-b border-border">
+          <h2 className="text-base font-semibold text-foreground flex items-center gap-2">
+            <Share2 className="w-4 h-4 text-primary" />
             Share Your Referral
           </h2>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-400"
+            className="w-8 h-8 rounded-lg bg-muted/40 hover:bg-muted flex items-center justify-center text-muted-foreground"
           >
             <X className="w-4 h-4" />
           </button>
@@ -143,23 +143,23 @@ function ShareModal({ onClose }: { onClose: () => void }) {
               <MessageCircle className="w-5 h-5 text-[#25D366]" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-semibold text-white">Share via WhatsApp</p>
-              <p className="text-[11px] text-slate-400">Send your referral link directly</p>
+              <p className="text-sm font-semibold text-foreground">Share via WhatsApp</p>
+              <p className="text-[11px] text-muted-foreground">Send your referral link directly</p>
             </div>
-            <ChevronRight className="w-4 h-4 text-slate-500" />
+            <ChevronRight className="w-4 h-4 text-muted-foreground" />
           </a>
 
           {/* Email */}
           {!sent ? (
             <form onSubmit={handleEmailShare} className="space-y-3">
-              <label className="text-xs font-medium text-slate-300">Send via Email</label>
+              <label className="text-xs font-medium text-foreground">Send via Email</label>
               <div className="flex gap-2">
                 <Input
                   type="email"
                   placeholder="friend@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-10 rounded-xl bg-white/5 border-white/10 text-slate-200 placeholder:text-slate-600 focus-visible:ring-violet-500"
+                  className="h-10 rounded-xl bg-background border-border text-foreground placeholder:text-muted-foreground focus-visible:ring-primary"
                   required
                 />
                 <Button
@@ -180,14 +180,14 @@ function ShareModal({ onClose }: { onClose: () => void }) {
 
           {/* Copy link */}
           <div className="space-y-2">
-            <label className="text-xs font-medium text-slate-300">Or copy your referral link</label>
+            <label className="text-xs font-medium text-foreground">Or copy your referral link</label>
             <div className="flex gap-2">
-              <div className="flex-1 h-10 rounded-xl bg-white/5 border border-white/10 px-3 flex items-center text-xs font-mono text-slate-400 overflow-hidden">
+              <div className="flex-1 h-10 rounded-xl bg-muted/40 border border-border px-3 flex items-center text-xs font-mono text-muted-foreground overflow-hidden">
                 <span className="truncate">{REFERRAL_LINK}</span>
               </div>
               <button
                 onClick={() => navigator.clipboard?.writeText(REFERRAL_LINK)}
-                className="h-10 px-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-slate-400 transition-colors"
+                className="h-10 px-3 rounded-xl bg-muted/40 border border-border hover:bg-muted text-muted-foreground transition-colors"
               >
                 <Link className="w-4 h-4" />
               </button>
@@ -212,15 +212,15 @@ export default function ReferralsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-full bg-background">
       {showShare && <ShareModal onClose={() => setShowShare(false)} />}
 
       {/* ── Header ──────────────────────────────────────────────────────── */}
-      <div className="border-b border-white/5 bg-gradient-to-br from-purple-950/60 via-[#0f0f1a] to-[#0a0a0f] px-6 py-8">
+      <div className="border-b border-border bg-card px-6 py-8">
         <div className="max-w-4xl mx-auto">
-          <p className="text-xs font-medium text-violet-400 tracking-widest uppercase mb-1">Buyer OS</p>
-          <h1 className="text-2xl font-bold tracking-tight">Referral Program</h1>
-          <p className="text-slate-400 text-sm mt-1">
+          <p className="text-xs font-medium text-primary tracking-widest uppercase mb-1">Buyer OS</p>
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">Referral Program</h1>
+          <p className="text-muted-foreground text-sm mt-1">
             Refer friends &amp; earn ₹{(REWARD_PER_BOOKING).toLocaleString("en-IN")} for every booking
           </p>
         </div>
@@ -230,15 +230,15 @@ export default function ReferralsPage() {
 
         {/* ── Earnings Overview ────────────────────────────────────────── */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Card className="bg-[#12121f] border-violet-500/20 rounded-2xl">
+          <Card className="bg-card border-primary/20 rounded-2xl">
             <CardContent className="p-5">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-xl bg-amber-500/15 flex items-center justify-center">
                   <IndianRupee className="w-5 h-5 text-amber-400" />
                 </div>
-                <p className="text-xs text-slate-400">Reward Pending</p>
+                <p className="text-xs text-muted-foreground">Reward Pending</p>
               </div>
-              <p className="text-2xl font-bold text-white">₹{pendingReward.toLocaleString("en-IN")}</p>
+              <p className="text-2xl font-bold text-foreground">₹{pendingReward.toLocaleString("en-IN")}</p>
               <p className="text-[10px] text-amber-400 mt-1 flex items-center gap-1">
                 <Clock className="w-3 h-3" />
                 Awaiting agreement execution
@@ -246,15 +246,15 @@ export default function ReferralsPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-[#12121f] border-white/8 rounded-2xl">
+          <Card className="bg-card border-border rounded-2xl">
             <CardContent className="p-5">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center">
                   <Gift className="w-5 h-5 text-emerald-400" />
                 </div>
-                <p className="text-xs text-slate-400">Total Earned</p>
+                <p className="text-xs text-muted-foreground">Total Earned</p>
               </div>
-              <p className="text-2xl font-bold text-white">₹{totalEarned.toLocaleString("en-IN")}</p>
+              <p className="text-2xl font-bold text-foreground">₹{totalEarned.toLocaleString("en-IN")}</p>
               <p className="text-[10px] text-emerald-400 mt-1 flex items-center gap-1">
                 <CheckCircle2 className="w-3 h-3" />
                 {totalEarned > 0 ? "Credited to your account" : "Make your first referral"}
@@ -262,16 +262,16 @@ export default function ReferralsPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-[#12121f] border-white/8 rounded-2xl">
+          <Card className="bg-card border-border rounded-2xl">
             <CardContent className="p-5">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl bg-blue-500/15 flex items-center justify-center">
-                  <Users className="w-5 h-5 text-blue-400" />
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Users className="w-5 h-5 text-primary" />
                 </div>
-                <p className="text-xs text-slate-400">Friends Referred</p>
+                <p className="text-xs text-muted-foreground">Friends Referred</p>
               </div>
-              <p className="text-2xl font-bold text-white">{referredFriends.length}</p>
-              <p className="text-[10px] text-slate-500 mt-1">
+              <p className="text-2xl font-bold text-foreground">{referredFriends.length}</p>
+              <p className="text-[10px] text-muted-foreground mt-1">
                 {referredFriends.filter((r) => r.status === "booked" || r.status === "rewarded").length} booked so far
               </p>
             </CardContent>
@@ -279,23 +279,23 @@ export default function ReferralsPage() {
         </div>
 
         {/* ── Referral Code Card ───────────────────────────────────────── */}
-        <Card className="bg-gradient-to-br from-violet-900/40 via-purple-900/20 to-[#12121f] border-violet-500/25 rounded-2xl overflow-hidden">
+        <Card className="bg-primary/5 border-primary/20 rounded-2xl overflow-hidden">
           <CardContent className="p-4 md:p-6">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
-                  <Sparkles className="w-4 h-4 text-violet-400" />
-                  <p className="text-xs font-medium text-violet-300 uppercase tracking-widest">Your Referral Code</p>
+                  <Sparkles className="w-4 h-4 text-primary" />
+                  <p className="text-xs font-medium text-primary uppercase tracking-widest">Your Referral Code</p>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="inline-flex items-center gap-3 bg-black/30 border border-violet-500/30 rounded-xl px-4 py-3">
-                    <span className="text-2xl font-bold font-mono text-white tracking-widest">{REFERRAL_CODE}</span>
+                  <div className="inline-flex items-center gap-3 bg-muted/40 border border-primary/20 rounded-xl px-4 py-3">
+                    <span className="text-2xl font-bold font-mono text-foreground tracking-widest">{REFERRAL_CODE}</span>
                     <button
                       onClick={handleCopy}
                       className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${
                         copied
                           ? "bg-emerald-500/20 text-emerald-400"
-                          : "bg-white/10 hover:bg-white/20 text-slate-300"
+                          : "bg-muted/60 hover:bg-muted text-foreground"
                       }`}
                       title="Copy code"
                     >
@@ -309,7 +309,7 @@ export default function ReferralsPage() {
                     </span>
                   )}
                 </div>
-                <p className="text-xs text-slate-500 mt-2">
+                <p className="text-xs text-muted-foreground mt-2">
                   Share this code with friends — they get priority onboarding &amp; you earn rewards
                 </p>
               </div>
@@ -326,7 +326,7 @@ export default function ReferralsPage() {
                 <Button
                   onClick={() => setShowShare(true)}
                   variant="outline"
-                  className="h-10 rounded-xl border-white/10 text-slate-300 bg-white/5 hover:bg-white/10 gap-2 text-sm"
+                  className="h-10 rounded-xl border-border text-foreground bg-muted/40 hover:bg-muted gap-2 text-sm"
                 >
                   <Mail className="w-4 h-4" />
                   Email
@@ -334,7 +334,7 @@ export default function ReferralsPage() {
                 <Button
                   onClick={handleCopy}
                   variant="outline"
-                  className="h-10 rounded-xl border-white/10 text-slate-300 bg-white/5 hover:bg-white/10 gap-2 text-sm"
+                  className="h-10 rounded-xl border-border text-foreground bg-muted/40 hover:bg-muted gap-2 text-sm"
                 >
                   <Link className="w-4 h-4" />
                   Copy Link
@@ -345,14 +345,14 @@ export default function ReferralsPage() {
         </Card>
 
         {/* ── How It Works ─────────────────────────────────────────────── */}
-        <Card className="bg-[#12121f] border-white/8 rounded-2xl">
+        <Card className="bg-card border-border rounded-2xl">
           <CardHeader className="pb-2 px-5 pt-5">
-            <CardTitle className="text-sm font-semibold text-white">How It Works</CardTitle>
+            <CardTitle className="text-sm font-semibold text-foreground">How It Works</CardTitle>
           </CardHeader>
           <CardContent className="px-5 pb-5">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 relative">
               {/* Connector line (desktop only) */}
-              <div className="absolute top-8 left-[calc(16.7%+8px)] right-[calc(16.7%+8px)] h-px bg-gradient-to-r from-violet-500/30 via-purple-500/30 to-violet-500/30 hidden sm:block" />
+              <div className="absolute top-8 left-[calc(16.7%+8px)] right-[calc(16.7%+8px)] h-px bg-border hidden sm:block" />
 
               {[
                 {
@@ -390,30 +390,30 @@ export default function ReferralsPage() {
                     </div>
                     <span className={`text-[10px] font-bold uppercase tracking-widest ${color}`}>Step {step}</span>
                   </div>
-                  <p className="text-sm font-semibold text-white">{title}</p>
-                  <p className="text-xs text-slate-400 leading-relaxed">{desc}</p>
+                  <p className="text-sm font-semibold text-foreground">{title}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{desc}</p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-5 rounded-xl bg-white/[0.03] border border-white/8 p-4 flex items-start gap-3">
+            <div className="mt-5 rounded-xl bg-muted/20 border border-border p-4 flex items-start gap-3">
               <Star className="w-4 h-4 text-yellow-400 shrink-0 mt-0.5" />
-              <p className="text-xs text-slate-400 leading-relaxed">
-                <span className="text-slate-200 font-medium">Terms:</span> Reward is paid after the referred friend completes the agreement execution and pays the first instalment. No cap on earnings — refer as many friends as you like!
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                <span className="text-foreground font-medium">Terms:</span> Reward is paid after the referred friend completes the agreement execution and pays the first instalment. No cap on earnings — refer as many friends as you like!
               </p>
             </div>
           </CardContent>
         </Card>
 
         {/* ── Referred Friends ─────────────────────────────────────────── */}
-        <Card className="bg-[#12121f] border-white/8 rounded-2xl">
+        <Card className="bg-card border-border rounded-2xl">
           <CardHeader className="pb-0 px-5 pt-5">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-semibold text-white flex items-center gap-2">
-                <Users className="w-4 h-4 text-blue-400" />
+              <CardTitle className="text-sm font-semibold text-foreground flex items-center gap-2">
+                <Users className="w-4 h-4 text-primary" />
                 Referred Friends
               </CardTitle>
-              <Badge className="bg-blue-500/15 text-blue-400 border-blue-500/30 text-[10px]">
+              <Badge className="bg-primary/10 text-primary border-primary/20 text-[10px]">
                 {referredFriends.length} total
               </Badge>
             </div>
@@ -421,9 +421,9 @@ export default function ReferralsPage() {
           <CardContent className="px-5 py-4 space-y-3">
             {referredFriends.length === 0 ? (
               <div className="text-center py-10">
-                <UserPlus className="w-10 h-10 text-slate-700 mx-auto mb-3" />
-                <p className="text-slate-500 text-sm">No referrals yet</p>
-                <p className="text-slate-600 text-xs mt-1">Share your code to get started</p>
+                <UserPlus className="w-10 h-10 text-muted-foreground mx-auto mb-3" />
+                <p className="text-muted-foreground text-sm">No referrals yet</p>
+                <p className="text-muted-foreground text-xs mt-1">Share your code to get started</p>
               </div>
             ) : (
               referredFriends.map((ref) => {
@@ -431,11 +431,11 @@ export default function ReferralsPage() {
                 return (
                   <div
                     key={ref.id}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-white/10 transition-all"
+                    className="flex items-center gap-4 p-4 rounded-xl bg-muted/20 border border-border hover:border-primary/20 transition-all"
                   >
                     {/* Avatar */}
-                    <div className="w-10 h-10 rounded-full bg-violet-500/20 border border-violet-500/20 flex items-center justify-center shrink-0">
-                      <span className="text-sm font-bold text-violet-300">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                      <span className="text-sm font-bold text-primary">
                         {ref.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
                       </span>
                     </div>
@@ -443,18 +443,18 @@ export default function ReferralsPage() {
                     {/* Info */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <p className="text-sm font-medium text-white">{ref.name}</p>
+                        <p className="text-sm font-medium text-foreground">{ref.name}</p>
                         <Badge className={`border text-[10px] flex items-center gap-1 ${sc.color}`}>
                           {sc.icon}
                           {sc.label}
                         </Badge>
                       </div>
-                      <div className="flex items-center gap-3 mt-0.5 text-[11px] text-slate-500">
+                      <div className="flex items-center gap-3 mt-0.5 text-[11px] text-muted-foreground">
                         <span>{ref.phone}</span>
                         {ref.project && (
                           <>
                             <span>·</span>
-                            <span className="text-violet-400">{ref.project}</span>
+                            <span className="text-primary">{ref.project}</span>
                           </>
                         )}
                         <span>·</span>
@@ -479,7 +479,7 @@ export default function ReferralsPage() {
             {/* Invite more */}
             <button
               onClick={() => setShowShare(true)}
-              className="w-full mt-2 h-11 rounded-xl border border-dashed border-white/15 hover:border-violet-500/40 text-slate-500 hover:text-violet-400 text-sm transition-all flex items-center justify-center gap-2"
+              className="w-full mt-2 h-11 rounded-xl border border-dashed border-border hover:border-primary/40 text-muted-foreground hover:text-primary text-sm transition-all flex items-center justify-center gap-2"
             >
               <UserPlus className="w-4 h-4" />
               Invite another friend

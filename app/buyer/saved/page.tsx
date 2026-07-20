@@ -131,8 +131,8 @@ const typeIconMap: Record<string, React.ReactNode> = {
 const statusColor: Record<string, string> = {
   "Ready to Move": "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
   "Under Construction": "bg-amber-500/15 text-amber-400 border-amber-500/30",
-  Planning: "bg-slate-500/15 text-slate-400 border-slate-600/30",
-  Approved: "bg-blue-500/15 text-blue-400 border-blue-500/30",
+  Planning: "bg-muted text-muted-foreground border-border",
+  Approved: "bg-primary/10 text-primary border-primary/20",
   Completed: "bg-teal-500/15 text-teal-400 border-teal-500/30",
 };
 
@@ -164,7 +164,7 @@ function CompareModal({
     {
       label: "Status",
       key: (p) => (
-        <Badge className={`border text-[10px] ${statusColor[p.status] ?? "bg-slate-500/15 text-slate-400"}`}>
+        <Badge className={`border text-[10px] ${statusColor[p.status] ?? "bg-muted text-muted-foreground border-border"}`}>
           {p.status}
         </Badge>
       ),
@@ -201,9 +201,9 @@ function CompareModal({
             <div className="flex items-center justify-between text-[10px]">
               <span>{pct}%</span>
             </div>
-            <div className="w-full h-1.5 rounded-full bg-white/10">
+            <div className="w-full h-1.5 rounded-full bg-muted">
               <div
-                className="h-1.5 rounded-full bg-violet-500"
+                className="h-1.5 rounded-full bg-primary"
                 style={{ width: `${pct}%` }}
               />
             </div>
@@ -219,7 +219,7 @@ function CompareModal({
         return (
           <div className="flex items-center gap-1.5">
             <Sparkles className="w-3 h-3 text-yellow-400" />
-            <span className="font-bold text-yellow-300">{score}%</span>
+            <span className="font-bold text-yellow-500">{score}%</span>
           </div>
         );
       },
@@ -229,7 +229,7 @@ function CompareModal({
       key: (p) => (
         <div className="flex flex-col gap-1">
           {(projectMeta[p.id]?.highlights ?? []).map((h) => (
-            <div key={h} className="flex items-center gap-1 text-[10px] text-violet-300">
+            <div key={h} className="flex items-center gap-1 text-[10px] text-primary">
               <CheckCircle2 className="w-3 h-3 shrink-0" />
               {h}
             </div>
@@ -242,8 +242,8 @@ function CompareModal({
       key: (p) => (
         <div className="flex flex-wrap gap-1.5">
           {p.amenities.slice(0, 4).map((a) => (
-            <div key={a} className="flex items-center gap-1 text-[10px] text-slate-400">
-              <span className="text-slate-500">{amenityIconMap[a]}</span>
+            <div key={a} className="flex items-center gap-1 text-[10px] text-muted-foreground">
+              <span className="text-muted-foreground">{amenityIconMap[a]}</span>
               {a.split(" ")[0]}
             </div>
           ))}
@@ -252,42 +252,42 @@ function CompareModal({
     },
     {
       label: "RERA Number",
-      key: (p) => <span className="font-mono text-[10px] text-slate-500">{p.reraNumber}</span>,
+      key: (p) => <span className="font-mono text-[10px] text-muted-foreground">{p.reraNumber}</span>,
     },
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-      <div className="w-full max-w-4xl rounded-2xl bg-[#12121f] border border-white/10 shadow-2xl my-8">
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-foreground/60 backdrop-blur-sm p-4 overflow-y-auto">
+      <div className="w-full max-w-4xl rounded-2xl bg-card border border-border shadow-2xl my-8">
         {/* Header */}
-        <div className="flex items-center justify-between p-5 border-b border-white/8">
+        <div className="flex items-center justify-between p-5 border-b border-border">
           <div>
-            <h2 className="text-base font-semibold text-white flex items-center gap-2">
-              <GitCompareArrows className="w-4 h-4 text-sky-400" />
+            <h2 className="text-base font-semibold text-foreground flex items-center gap-2">
+              <GitCompareArrows className="w-4 h-4 text-primary" />
               Property Comparison
             </h2>
-            <p className="text-xs text-slate-400 mt-0.5">Side-by-side specs for {selected.length} properties</p>
+            <p className="text-xs text-muted-foreground mt-0.5">Side-by-side specs for {selected.length} properties</p>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors"
+            className="w-8 h-8 rounded-lg bg-muted/40 hover:bg-muted flex items-center justify-center text-muted-foreground transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Project header row */}
-        <div className="grid gap-0 border-b border-white/8" style={{ gridTemplateColumns: `160px repeat(${selected.length}, 1fr)` }}>
-          <div className="p-4 text-xs text-slate-500 font-medium uppercase tracking-wider" />
+        <div className="grid gap-0 border-b border-border" style={{ gridTemplateColumns: `160px repeat(${selected.length}, 1fr)` }}>
+          <div className="p-4 text-xs text-muted-foreground font-medium uppercase tracking-wider" />
           {selected.map((proj) => {
             const meta = projectMeta[proj.id];
             return (
-              <div key={proj.id} className="p-4 border-l border-white/8">
-                <div className={`h-16 rounded-xl bg-gradient-to-br ${meta?.gradient ?? "from-slate-700 to-slate-800"} flex items-center justify-center mb-3`}>
+              <div key={proj.id} className="p-4 border-l border-border">
+                <div className={`h-16 rounded-xl bg-gradient-to-br ${meta?.gradient ?? "from-primary/20 to-primary/10"} flex items-center justify-center mb-3`}>
                   {typeIconMap[proj.type] ?? <Building2 className="w-8 h-8 text-white/80" />}
                 </div>
-                <p className="text-sm font-semibold text-white leading-tight">{proj.name}</p>
-                <p className="text-[11px] text-slate-500 mt-0.5">{meta?.developer}</p>
+                <p className="text-sm font-semibold text-foreground leading-tight">{proj.name}</p>
+                <p className="text-[11px] text-muted-foreground mt-0.5">{meta?.developer}</p>
               </div>
             );
           })}
@@ -297,12 +297,12 @@ function CompareModal({
         {rows.map((row, idx) => (
           <div
             key={row.label}
-            className={`grid border-b border-white/5 last:border-0 ${idx % 2 === 0 ? "" : "bg-white/[0.02]"}`}
+            className={`grid border-b border-border last:border-0 ${idx % 2 === 0 ? "" : "bg-muted/20"}`}
             style={{ gridTemplateColumns: `160px repeat(${selected.length}, 1fr)` }}
           >
-            <div className="px-4 py-3 text-[11px] text-slate-500 font-medium flex items-center">{row.label}</div>
+            <div className="px-4 py-3 text-[11px] text-muted-foreground font-medium flex items-center">{row.label}</div>
             {selected.map((proj) => (
-              <div key={proj.id} className="px-4 py-3 border-l border-white/5 text-xs text-slate-300">
+              <div key={proj.id} className="px-4 py-3 border-l border-border text-xs text-foreground">
                 {row.key(proj)}
               </div>
             ))}
@@ -310,7 +310,7 @@ function CompareModal({
         ))}
 
         {/* Footer CTAs */}
-        <div className="p-5 border-t border-white/8">
+        <div className="p-5 border-t border-border">
           <div className={`grid gap-3`} style={{ gridTemplateColumns: `160px repeat(${selected.length}, 1fr)` }}>
             <div />
             {selected.map((proj) => (
@@ -367,18 +367,18 @@ export default function SavedPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-full bg-background">
       {showCompare && (
         <CompareModal ids={[...compareIds]} onClose={() => setShowCompare(false)} />
       )}
 
       {/* ── Header ──────────────────────────────────────────────────────── */}
-      <div className="border-b border-white/5 bg-gradient-to-br from-slate-900 via-[#0f0f1a] to-[#0a0a0f] px-6 py-8">
+      <div className="border-b border-border bg-card px-6 py-8">
         <div className="max-w-6xl mx-auto flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-medium text-violet-400 tracking-widest uppercase mb-1">Buyer OS</p>
-            <h1 className="text-2xl font-bold tracking-tight">Saved Properties</h1>
-            <p className="text-slate-400 text-sm mt-1">
+            <p className="text-xs font-medium text-primary tracking-widest uppercase mb-1">Buyer OS</p>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">Saved Properties</h1>
+            <p className="text-muted-foreground text-sm mt-1">
               {savedProjects.length} {savedProjects.length === 1 ? "property" : "properties"} in your wishlist
             </p>
           </div>
@@ -398,11 +398,11 @@ export default function SavedPage() {
 
         {/* ── Compare bar ──────────────────────────────────────────────── */}
         {compareIds.size > 0 && compareIds.size < 2 && (
-          <div className="mb-6 rounded-2xl border border-sky-500/20 bg-sky-900/15 px-5 py-3 flex items-center gap-3">
+          <div className="mb-6 rounded-2xl border border-sky-500/20 bg-sky-500/5 px-5 py-3 flex items-center gap-3">
             <GitCompareArrows className="w-4 h-4 text-sky-400 shrink-0" />
-            <p className="text-sm text-sky-300 flex-1">
+            <p className="text-sm text-foreground flex-1">
               <span className="font-semibold">{compareIds.size} property selected</span>
-              <span className="text-sky-500 ml-2 text-xs">Select at least 2 to compare (max 3)</span>
+              <span className="text-muted-foreground ml-2 text-xs">Select at least 2 to compare (max 3)</span>
             </p>
           </div>
         )}
@@ -410,13 +410,13 @@ export default function SavedPage() {
         {/* ── Empty state ───────────────────────────────────────────────── */}
         {savedProjects.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
-            <Heart className="w-14 h-14 text-slate-700 mb-4" />
-            <p className="text-slate-400 font-medium mb-1">No saved properties yet</p>
-            <p className="text-slate-600 text-sm mb-5">Browse properties and tap the heart icon to save them here</p>
+            <Heart className="w-14 h-14 text-muted-foreground mb-4" />
+            <p className="text-muted-foreground font-medium mb-1">No saved properties yet</p>
+            <p className="text-muted-foreground text-sm mb-5">Browse properties and tap the heart icon to save them here</p>
             <Button
               variant="outline"
               size="sm"
-              className="rounded-xl border-white/10 text-slate-400 bg-white/5 hover:bg-white/10"
+              className="rounded-xl border-border text-muted-foreground bg-muted/40 hover:bg-muted"
             >
               Discover Properties
             </Button>
@@ -435,13 +435,13 @@ export default function SavedPage() {
               return (
                 <Card
                   key={project.id}
-                  className={`group relative bg-[#12121f] border rounded-2xl overflow-hidden transition-all duration-200 hover:shadow-2xl hover:shadow-violet-900/20 ${
-                    isComparing ? "border-sky-500/40" : "border-white/8 hover:border-violet-500/25"
+                  className={`group relative bg-card border rounded-2xl overflow-hidden transition-all duration-200 hover:shadow-lg ${
+                    isComparing ? "border-sky-500/40" : "border-border hover:border-primary/25"
                   }`}
                 >
                   {/* ── Gradient header ── */}
                   <div
-                    className={`relative h-40 bg-gradient-to-br ${meta?.gradient ?? "from-slate-700 to-slate-800"} flex flex-col justify-between p-4`}
+                    className={`relative h-40 bg-gradient-to-br ${meta?.gradient ?? "from-primary/20 to-primary/10"} flex flex-col justify-between p-4`}
                   >
                     <div className="flex items-start justify-between">
                       <div className="h-11 w-11 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center">
@@ -452,7 +452,7 @@ export default function SavedPage() {
                           RERA
                         </Badge>
                         {meta && (
-                          <Badge className="bg-black/30 backdrop-blur-sm border-0 text-[10px] font-semibold flex items-center gap-1">
+                          <Badge className="bg-muted/60 backdrop-blur-sm border-0 text-[10px] font-semibold flex items-center gap-1">
                             <Sparkles className="w-2.5 h-2.5 text-yellow-400" />
                             <span className="text-yellow-300">{meta.aiMatchScore}%</span>
                           </Badge>
@@ -462,7 +462,7 @@ export default function SavedPage() {
 
                     <div>
                       <Badge
-                        className={`border text-[10px] px-2 py-0 mb-2 ${statusColor[project.status] ?? "bg-slate-500/15 text-slate-400"}`}
+                        className={`border text-[10px] px-2 py-0 mb-2 ${statusColor[project.status] ?? "bg-muted text-muted-foreground border-border"}`}
                       >
                         {project.status}
                       </Badge>
@@ -473,7 +473,7 @@ export default function SavedPage() {
 
                   <CardContent className="p-4 space-y-3">
                     {/* Location */}
-                    <div className="flex items-center gap-1.5 text-xs text-slate-400">
+                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       <MapPin className="w-3.5 h-3.5 text-rose-400 shrink-0" />
                       {project.location.line1}, {project.location.city}
                     </div>
@@ -482,10 +482,10 @@ export default function SavedPage() {
                     {meta && (
                       <div className="flex items-baseline gap-1">
                         <IndianRupee className="w-3.5 h-3.5 text-emerald-400 self-center shrink-0" />
-                        <span className="text-sm font-bold text-white">{formatPrice(meta.priceMin)}</span>
-                        <span className="text-slate-500 text-xs">–</span>
-                        <span className="text-sm font-bold text-white">{formatPrice(meta.priceMax)}</span>
-                        <span className="ml-auto text-[10px] text-slate-500">{project.availableUnits} left</span>
+                        <span className="text-sm font-bold text-foreground">{formatPrice(meta.priceMin)}</span>
+                        <span className="text-muted-foreground text-xs">–</span>
+                        <span className="text-sm font-bold text-foreground">{formatPrice(meta.priceMax)}</span>
+                        <span className="ml-auto text-[10px] text-muted-foreground">{project.availableUnits} left</span>
                       </div>
                     )}
 
@@ -493,7 +493,7 @@ export default function SavedPage() {
                     {meta && (
                       <div className="flex flex-wrap gap-1">
                         {meta.unitTypes.map((u) => (
-                          <Badge key={u} variant="outline" className="text-[10px] px-2 py-0 border-white/10 text-slate-400 bg-white/5">
+                          <Badge key={u} variant="outline" className="text-[10px] px-2 py-0 border-border text-muted-foreground bg-muted/40">
                             {u}
                           </Badge>
                         ))}
@@ -501,7 +501,7 @@ export default function SavedPage() {
                     )}
 
                     {/* Possession */}
-                    <div className="flex items-center gap-1 text-[11px] text-slate-500">
+                    <div className="flex items-center gap-1 text-[11px] text-muted-foreground">
                       <CalendarDays className="w-3 h-3" />
                       Possession:{" "}
                       {new Date(project.completionDate).toLocaleDateString("en-IN", {
@@ -512,9 +512,9 @@ export default function SavedPage() {
 
                     {/* Amenity icons */}
                     {amenities.length > 0 && (
-                      <div className="flex items-center gap-3 py-2 border-t border-white/5">
+                      <div className="flex items-center gap-3 py-2 border-t border-border">
                         {amenities.map((a, i) => (
-                          <div key={i} className="flex flex-col items-center gap-0.5 text-slate-500">
+                          <div key={i} className="flex flex-col items-center gap-0.5 text-muted-foreground">
                             {a.icon}
                             <span className="text-[9px]">{a.label}</span>
                           </div>
@@ -552,8 +552,8 @@ export default function SavedPage() {
                           isComparing
                             ? "bg-sky-500/20 border-sky-500/40 text-sky-400"
                             : compareIds.size >= 3
-                            ? "bg-white/5 border-white/10 text-slate-600 cursor-not-allowed"
-                            : "bg-white/5 border-white/10 text-slate-500 hover:border-sky-500/40 hover:text-sky-400"
+                            ? "bg-muted/40 border-border text-muted-foreground cursor-not-allowed"
+                            : "bg-muted/40 border-border text-muted-foreground hover:border-sky-500/40 hover:text-sky-400"
                         }`}
                         title={isComparing ? "Remove from compare" : "Add to compare"}
                       >
@@ -575,11 +575,11 @@ export default function SavedPage() {
 
         {/* ── Tips ────────────────────────────────────────────────────── */}
         {savedProjects.length > 0 && (
-          <div className="mt-8 rounded-2xl border border-violet-500/20 bg-violet-900/15 p-4 flex items-start gap-3">
-            <Sparkles className="w-4 h-4 text-violet-400 shrink-0 mt-0.5" />
+          <div className="mt-8 rounded-2xl border border-primary/20 bg-primary/5 p-4 flex items-start gap-3">
+            <Sparkles className="w-4 h-4 text-primary shrink-0 mt-0.5" />
             <div>
-              <p className="text-xs font-semibold text-violet-200">Pro tip</p>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs font-semibold text-primary">Pro tip</p>
+              <p className="text-xs text-muted-foreground mt-0.5">
                 Select 2–3 properties using the compare button to see a side-by-side spec comparison.
               </p>
             </div>

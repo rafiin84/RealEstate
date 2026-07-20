@@ -147,8 +147,8 @@ const formatPrice = (value: number) => {
 const statusColor: Record<string, string> = {
   "Ready to Move": "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
   "Under Construction": "bg-amber-500/15 text-amber-400 border-amber-500/30",
-  Planning: "bg-slate-500/15 text-slate-400 border-slate-500/30",
-  Approved: "bg-blue-500/15 text-blue-400 border-blue-500/30",
+  Planning: "bg-muted text-muted-foreground border-border",
+  Approved: "bg-primary/10 text-primary border-primary/20",
   Completed: "bg-teal-500/15 text-teal-400 border-teal-500/30",
   "On Hold": "bg-rose-500/15 text-rose-400 border-rose-500/30",
 };
@@ -275,37 +275,33 @@ export default function DiscoverPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-full bg-background">
       {/* ── Hero Search Banner ─────────────────────────────── */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-[#0f0f1a] to-[#0a0a0f] border-b border-white/5">
-        {/* decorative orb */}
-        <div className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 h-96 w-96 rounded-full bg-violet-600/10 blur-3xl" />
-        <div className="pointer-events-none absolute top-0 right-0 h-64 w-64 rounded-full bg-indigo-600/8 blur-3xl" />
-
-        <div className="relative mx-auto max-w-7xl px-6 py-10">
-          <p className="mb-1 text-sm font-medium text-violet-400 tracking-widest uppercase">
+      <div className="border-b border-border bg-card px-6 py-10">
+        <div className="relative mx-auto max-w-7xl">
+          <p className="mb-1 text-sm font-medium text-primary tracking-widest uppercase">
             Buyer OS — Discover
           </p>
-          <h1 className="mb-2 text-3xl font-bold tracking-tight">
+          <h1 className="mb-2 text-3xl font-bold tracking-tight text-foreground">
             Find your dream property
           </h1>
-          <p className="mb-8 text-slate-400 text-sm">
+          <p className="mb-8 text-muted-foreground text-sm">
             Browse {projects.length} curated projects across India&apos;s fastest-growing cities
           </p>
 
           {/* Search bar */}
           <div className="relative flex items-center max-w-3xl">
-            <Search className="absolute left-4 h-5 w-5 text-slate-400 pointer-events-none" />
+            <Search className="absolute left-4 h-5 w-5 text-muted-foreground pointer-events-none" />
             <Input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by project, location, budget..."
-              className="w-full h-14 pl-12 pr-16 rounded-2xl bg-white/5 border-white/10 text-white placeholder:text-slate-500 text-base focus-visible:ring-violet-500 focus-visible:border-violet-500"
+              className="w-full h-14 pl-12 pr-16 rounded-2xl bg-background border-border text-foreground placeholder:text-muted-foreground text-base focus-visible:ring-primary focus-visible:border-primary"
             />
             {search && (
               <button
                 onClick={() => setSearch("")}
-                className="absolute right-4 text-slate-500 hover:text-white transition-colors"
+                className="absolute right-4 text-muted-foreground hover:text-foreground transition-colors"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -317,17 +313,17 @@ export default function DiscoverPage() {
       <div className="mx-auto max-w-7xl px-6 py-6">
         {/* ── Filter Row ────────────────────────────────────── */}
         <div className="mb-6 flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
+          <div className="flex items-center gap-1.5 text-muted-foreground text-xs font-medium">
             <SlidersHorizontal className="h-3.5 w-3.5" />
             Filters
           </div>
 
           {/* Property Type */}
           <Select value={filterType} onValueChange={(v) => setFilterType(v ?? "all")}>
-            <SelectTrigger className="h-9 w-44 rounded-xl bg-white/5 border-white/10 text-sm text-slate-300 hover:border-violet-500/50 transition-colors">
+            <SelectTrigger className="h-9 w-44 rounded-xl bg-muted/40 border-border text-sm text-foreground hover:border-primary/50 transition-colors">
               <SelectValue placeholder="Property Type" />
             </SelectTrigger>
-            <SelectContent className="bg-[#1a1a2e] border-white/10 text-white">
+            <SelectContent className="bg-card border-border text-foreground">
               <SelectItem value="all">All Types</SelectItem>
               <SelectItem value="Residential">Residential</SelectItem>
               <SelectItem value="Commercial">Commercial</SelectItem>
@@ -337,10 +333,10 @@ export default function DiscoverPage() {
 
           {/* City */}
           <Select value={filterCity} onValueChange={(v) => setFilterCity(v ?? "all")}>
-            <SelectTrigger className="h-9 w-40 rounded-xl bg-white/5 border-white/10 text-sm text-slate-300 hover:border-violet-500/50 transition-colors">
+            <SelectTrigger className="h-9 w-40 rounded-xl bg-muted/40 border-border text-sm text-foreground hover:border-primary/50 transition-colors">
               <SelectValue placeholder="City" />
             </SelectTrigger>
-            <SelectContent className="bg-[#1a1a2e] border-white/10 text-white">
+            <SelectContent className="bg-card border-border text-foreground">
               <SelectItem value="all">All Cities</SelectItem>
               {cities.map((c) => (
                 <SelectItem key={c} value={c}>
@@ -352,10 +348,10 @@ export default function DiscoverPage() {
 
           {/* Budget */}
           <Select value={filterBudget} onValueChange={(v) => setFilterBudget(v ?? "all")}>
-            <SelectTrigger className="h-9 w-40 rounded-xl bg-white/5 border-white/10 text-sm text-slate-300 hover:border-violet-500/50 transition-colors">
+            <SelectTrigger className="h-9 w-40 rounded-xl bg-muted/40 border-border text-sm text-foreground hover:border-primary/50 transition-colors">
               <SelectValue placeholder="Budget" />
             </SelectTrigger>
-            <SelectContent className="bg-[#1a1a2e] border-white/10 text-white">
+            <SelectContent className="bg-card border-border text-foreground">
               <SelectItem value="all">Any Budget</SelectItem>
               <SelectItem value="Under 50L">Under ₹50 L</SelectItem>
               <SelectItem value="50L–1Cr">₹50 L – ₹1 Cr</SelectItem>
@@ -367,10 +363,10 @@ export default function DiscoverPage() {
 
           {/* Status */}
           <Select value={filterStatus} onValueChange={(v) => setFilterStatus(v ?? "all")}>
-            <SelectTrigger className="h-9 w-48 rounded-xl bg-white/5 border-white/10 text-sm text-slate-300 hover:border-violet-500/50 transition-colors">
+            <SelectTrigger className="h-9 w-48 rounded-xl bg-muted/40 border-border text-sm text-foreground hover:border-primary/50 transition-colors">
               <SelectValue placeholder="Status" />
             </SelectTrigger>
-            <SelectContent className="bg-[#1a1a2e] border-white/10 text-white">
+            <SelectContent className="bg-card border-border text-foreground">
               <SelectItem value="all">Any Status</SelectItem>
               <SelectItem value="Ready">Ready to Move</SelectItem>
               <SelectItem value="Under Construction">Under Construction</SelectItem>
@@ -386,7 +382,7 @@ export default function DiscoverPage() {
                 className={`h-9 rounded-xl border px-3 text-xs font-medium transition-all ${
                   filterBHK.includes(b)
                     ? "bg-violet-600 border-violet-500 text-white"
-                    : "bg-white/5 border-white/10 text-slate-400 hover:border-violet-500/50 hover:text-slate-300"
+                    : "bg-muted/40 border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
                 }`}
               >
                 {b}
@@ -397,7 +393,7 @@ export default function DiscoverPage() {
           {activeFilterCount > 0 && (
             <button
               onClick={clearFilters}
-              className="ml-auto flex items-center gap-1 text-xs text-slate-500 hover:text-slate-300 transition-colors"
+              className="ml-auto flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
             >
               <X className="h-3 w-3" />
               Clear ({activeFilterCount})
@@ -411,8 +407,8 @@ export default function DiscoverPage() {
             onClick={() => setMapView((v) => !v)}
             className={`ml-auto h-9 rounded-xl border transition-all gap-1.5 ${
               mapView
-                ? "bg-violet-600/20 border-violet-500/50 text-violet-300"
-                : "bg-white/5 border-white/10 text-slate-400 hover:border-violet-500/50"
+                ? "bg-primary/10 border-primary/50 text-primary"
+                : "bg-muted/40 border-border text-muted-foreground hover:border-primary/50"
             }`}
           >
             {mapView ? (
@@ -429,19 +425,19 @@ export default function DiscoverPage() {
 
         {/* ── AI Recommendation Banner ──────────────────────── */}
         {buyer && (
-          <div className="mb-8 rounded-2xl border border-violet-500/20 bg-gradient-to-r from-violet-900/30 via-purple-900/20 to-transparent p-4 flex items-start gap-4">
-            <div className="flex-shrink-0 h-10 w-10 rounded-xl bg-violet-500/20 flex items-center justify-center">
-              <Sparkles className="h-5 w-5 text-violet-400" />
+          <div className="mb-8 rounded-2xl border border-primary/20 bg-primary/5 p-4 flex items-start gap-4">
+            <div className="flex-shrink-0 h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Sparkles className="h-5 w-5 text-primary" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-violet-200 mb-0.5">
+              <p className="text-sm font-semibold text-primary mb-0.5">
                 Based on your profile, here are our top picks for you
               </p>
-              <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">
+              <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
                 {buyer.aiPersona}
               </p>
             </div>
-            <Badge className="flex-shrink-0 bg-violet-600/30 text-violet-300 border-violet-500/30 text-xs">
+            <Badge className="flex-shrink-0 bg-primary/10 text-primary border-primary/20 text-xs">
               AI Powered
             </Badge>
           </div>
@@ -449,11 +445,11 @@ export default function DiscoverPage() {
 
         {/* ── Compare Bar ───────────────────────────────────── */}
         {compareIds.size > 0 && (
-          <div className="mb-6 rounded-2xl border border-sky-500/20 bg-sky-900/20 px-5 py-3 flex items-center justify-between">
-            <div className="flex items-center gap-2 text-sm text-sky-300">
+          <div className="mb-6 rounded-2xl border border-primary/20 bg-primary/5 px-5 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-2 text-sm text-foreground">
               <GitCompareArrows className="h-4 w-4" />
               <span className="font-medium">{compareIds.size} properties selected for comparison</span>
-              <span className="text-sky-500 text-xs">(max 3)</span>
+              <span className="text-muted-foreground text-xs">(max 3)</span>
             </div>
             <Button
               size="sm"
@@ -466,17 +462,17 @@ export default function DiscoverPage() {
 
         {/* ── Map Placeholder ───────────────────────────────── */}
         {mapView && (
-          <div className="mb-8 rounded-2xl border border-white/10 bg-white/5 h-96 flex flex-col items-center justify-center gap-3">
-            <Map className="h-12 w-12 text-slate-600" />
-            <p className="text-slate-500 font-medium">Interactive Map View</p>
-            <p className="text-slate-600 text-sm">
+          <div className="mb-8 rounded-2xl border border-border bg-muted/40 h-96 flex flex-col items-center justify-center gap-3">
+            <Map className="h-12 w-12 text-muted-foreground" />
+            <p className="text-muted-foreground font-medium">Interactive Map View</p>
+            <p className="text-muted-foreground text-sm">
               Map integration coming soon — showing {filteredProjects.length} results
             </p>
             <Button
               variant="outline"
               size="sm"
               onClick={() => setMapView(false)}
-              className="mt-2 rounded-xl border-white/10 text-slate-400 bg-white/5 hover:bg-white/10"
+              className="mt-2 rounded-xl border-border text-muted-foreground bg-muted/40 hover:bg-muted"
             >
               Back to Grid
             </Button>
@@ -486,15 +482,15 @@ export default function DiscoverPage() {
         {/* ── Results Header ────────────────────────────────── */}
         {!mapView && (
           <div className="mb-5 flex items-center justify-between">
-            <p className="text-sm text-slate-400">
+            <p className="text-sm text-muted-foreground">
               Showing{" "}
-              <span className="text-white font-semibold">{filteredProjects.length}</span>{" "}
+              <span className="text-foreground font-semibold">{filteredProjects.length}</span>{" "}
               {filteredProjects.length === 1 ? "project" : "projects"}
               {activeFilterCount > 0 && (
-                <span className="text-slate-500"> · {activeFilterCount} filter{activeFilterCount > 1 ? "s" : ""} active</span>
+                <span className="text-muted-foreground"> · {activeFilterCount} filter{activeFilterCount > 1 ? "s" : ""} active</span>
               )}
             </p>
-            <p className="text-xs text-slate-600">Sorted by AI Match Score</p>
+            <p className="text-xs text-muted-foreground">Sorted by AI Match Score</p>
           </div>
         )}
 
@@ -503,14 +499,14 @@ export default function DiscoverPage() {
           <>
             {filteredProjects.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-24 text-center">
-                <Search className="h-12 w-12 text-slate-700 mb-4" />
-                <p className="text-slate-400 font-medium mb-1">No properties match your filters</p>
-                <p className="text-slate-600 text-sm mb-4">Try adjusting or clearing your filters</p>
+                <Search className="h-12 w-12 text-muted-foreground mb-4" />
+                <p className="text-muted-foreground font-medium mb-1">No properties match your filters</p>
+                <p className="text-muted-foreground text-sm mb-4">Try adjusting or clearing your filters</p>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={clearFilters}
-                  className="rounded-xl border-white/10 text-slate-400 bg-white/5 hover:bg-white/10"
+                  className="rounded-xl border-border text-muted-foreground bg-muted/40 hover:bg-muted"
                 >
                   Clear all filters
                 </Button>
@@ -532,11 +528,11 @@ export default function DiscoverPage() {
                     return (
                       <Card
                         key={project.id}
-                        className="group relative bg-[#12121f] border-white/8 rounded-2xl overflow-hidden hover:border-violet-500/30 hover:shadow-2xl hover:shadow-violet-900/20 transition-all duration-300"
+                        className="group relative bg-card border-border rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-lg transition-all duration-300"
                       >
                         {/* ── Gradient Header ── */}
                         <div
-                          className={`relative h-44 bg-gradient-to-br ${meta?.gradient ?? "from-slate-700 to-slate-800"} flex flex-col justify-between p-4`}
+                          className={`relative h-44 bg-gradient-to-br ${meta?.gradient ?? "from-primary/20 to-primary/10"} flex flex-col justify-between p-4`}
                         >
                           {/* Top row: type icon + RERA badge */}
                           <div className="flex items-start justify-between">
@@ -548,7 +544,7 @@ export default function DiscoverPage() {
                                 RERA ✓
                               </Badge>
                               {meta && buyer && (
-                                <Badge className="bg-black/30 backdrop-blur-sm border-0 text-[10px] font-semibold flex items-center gap-1">
+                                <Badge className="bg-muted/60 backdrop-blur-sm border-0 text-[10px] font-semibold flex items-center gap-1">
                                   <Sparkles className="h-2.5 w-2.5 text-yellow-400" />
                                   <span className="text-yellow-300">{meta.aiMatchScore}% Match</span>
                                 </Badge>
@@ -560,7 +556,7 @@ export default function DiscoverPage() {
                           <div>
                             <div className="mb-2">
                               <Badge
-                                className={`border text-[10px] px-2 py-0 ${statusColor[project.status] ?? "bg-slate-500/15 text-slate-400 border-slate-500/30"}`}
+                                className={`border text-[10px] px-2 py-0 ${statusColor[project.status] ?? "bg-muted text-muted-foreground border-border"}`}
                               >
                                 {project.status}
                               </Badge>
@@ -581,7 +577,7 @@ export default function DiscoverPage() {
 
                         <CardContent className="p-4 space-y-3">
                           {/* Location */}
-                          <div className="flex items-center gap-1.5 text-slate-400 text-xs">
+                          <div className="flex items-center gap-1.5 text-muted-foreground text-xs">
                             <MapPin className="h-3.5 w-3.5 flex-shrink-0 text-rose-400" />
                             <span>
                               {project.location.line1}, {project.location.city},{" "}
@@ -593,14 +589,14 @@ export default function DiscoverPage() {
                           {meta && (
                             <div className="flex items-baseline gap-1.5">
                               <IndianRupee className="h-3.5 w-3.5 text-emerald-400 flex-shrink-0 self-center" />
-                              <span className="text-base font-bold text-white">
+                              <span className="text-base font-bold text-foreground">
                                 {formatPrice(meta.priceMin)}
                               </span>
-                              <span className="text-slate-500 text-xs">–</span>
-                              <span className="text-base font-bold text-white">
+                              <span className="text-muted-foreground text-xs">–</span>
+                              <span className="text-base font-bold text-foreground">
                                 {formatPrice(meta.priceMax)}
                               </span>
-                              <span className="text-slate-500 text-xs ml-auto">
+                              <span className="text-muted-foreground text-xs ml-auto">
                                 {project.availableUnits} units left
                               </span>
                             </div>
@@ -613,7 +609,7 @@ export default function DiscoverPage() {
                                 <Badge
                                   key={u}
                                   variant="outline"
-                                  className="text-[10px] px-2 py-0 border-white/10 text-slate-400 bg-white/5 rounded-lg"
+                                  className="text-[10px] px-2 py-0 border-border text-muted-foreground bg-muted/40 rounded-lg"
                                 >
                                   {u}
                                 </Badge>
@@ -622,7 +618,7 @@ export default function DiscoverPage() {
                           )}
 
                           {/* Possession date + RERA number */}
-                          <div className="flex items-center justify-between text-xs text-slate-500">
+                          <div className="flex items-center justify-between text-xs text-muted-foreground">
                             <div className="flex items-center gap-1">
                               <CalendarDays className="h-3 w-3" />
                               <span>
@@ -633,18 +629,18 @@ export default function DiscoverPage() {
                                 })}
                               </span>
                             </div>
-                            <span className="font-mono text-[10px] text-slate-600">
+                            <span className="font-mono text-[10px] text-muted-foreground">
                               {project.reraNumber}
                             </span>
                           </div>
 
                           {/* Amenities icons */}
                           {amenities.length > 0 && (
-                            <div className="flex items-center gap-3 py-2 border-t border-white/5">
+                            <div className="flex items-center gap-3 py-2 border-t border-border">
                               {amenities.map((a, i) => (
                                 <div
                                   key={i}
-                                  className="flex flex-col items-center gap-0.5 text-slate-500 hover:text-slate-300 transition-colors"
+                                  className="flex flex-col items-center gap-0.5 text-muted-foreground hover:text-foreground transition-colors"
                                   title={a.label}
                                 >
                                   {a.icon}
@@ -675,7 +671,7 @@ export default function DiscoverPage() {
                               className={`h-9 w-9 rounded-xl border flex items-center justify-center transition-all flex-shrink-0 ${
                                 isSaved
                                   ? "bg-rose-500/20 border-rose-500/40 text-rose-400"
-                                  : "bg-white/5 border-white/10 text-slate-500 hover:border-rose-500/40 hover:text-rose-400"
+                                  : "bg-muted/40 border-border text-muted-foreground hover:border-rose-500/40 hover:text-rose-400"
                               }`}
                               title={isSaved ? "Saved" : "Save"}
                             >
@@ -690,7 +686,7 @@ export default function DiscoverPage() {
                               className={`h-9 w-9 rounded-xl border flex items-center justify-center transition-all flex-shrink-0 ${
                                 isComparing
                                   ? "bg-sky-500/20 border-sky-500/40 text-sky-400"
-                                  : "bg-white/5 border-white/10 text-slate-500 hover:border-sky-500/40 hover:text-sky-400"
+                                  : "bg-muted/40 border-border text-muted-foreground hover:border-sky-500/40 hover:text-sky-400"
                               }`}
                               title="Compare"
                             >

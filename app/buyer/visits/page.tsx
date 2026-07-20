@@ -101,17 +101,17 @@ function StarRating({ rating }: { rating: number }) {
       {[1, 2, 3, 4, 5].map((s) => (
         <Star
           key={s}
-          className={`w-3.5 h-3.5 ${s <= rating ? "text-amber-400 fill-amber-400" : "text-slate-600"}`}
+          className={`w-3.5 h-3.5 ${s <= rating ? "text-amber-400 fill-amber-400" : "text-muted-foreground"}`}
         />
       ))}
-      <span className="ml-1 text-xs text-slate-400">{rating}/5</span>
+      <span className="ml-1 text-xs text-muted-foreground">{rating}/5</span>
     </div>
   );
 }
 
 function QRPlaceholder({ code }: { code: string }) {
   return (
-    <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/5 border border-white/10 w-28 shrink-0">
+    <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-muted/40 border border-border w-28 shrink-0">
       <div className="relative w-16 h-16">
         {/* QR pattern placeholder */}
         <div className="absolute inset-0 rounded-lg bg-white p-1 grid grid-cols-5 gap-0.5">
@@ -120,16 +120,16 @@ function QRPlaceholder({ code }: { code: string }) {
               key={i}
               className={`rounded-[1px] ${
                 [0, 1, 2, 3, 4, 5, 9, 10, 14, 15, 19, 20, 21, 22, 23, 24, 7, 12, 17].includes(i)
-                  ? "bg-slate-900"
+                  ? "bg-foreground"
                   : "bg-transparent"
               }`}
             />
           ))}
         </div>
-        <QrCode className="absolute inset-0 m-auto w-14 h-14 text-slate-900 opacity-0" />
+        <QrCode className="absolute inset-0 m-auto w-14 h-14 text-foreground opacity-0" />
       </div>
-      <p className="text-[9px] font-mono text-slate-500 tracking-widest">{code}</p>
-      <p className="text-[8px] text-slate-600 text-center">Show at gate</p>
+      <p className="text-[9px] font-mono text-muted-foreground tracking-widest">{code}</p>
+      <p className="text-[8px] text-muted-foreground text-center">Show at gate</p>
     </div>
   );
 }
@@ -151,16 +151,16 @@ function ScheduleForm({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-      <div className="w-full max-w-lg rounded-2xl bg-[#12121f] border border-white/10 shadow-2xl">
-        <div className="flex items-center justify-between p-5 border-b border-white/8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/50 backdrop-blur-sm p-4">
+      <div className="w-full max-w-lg rounded-2xl bg-card border border-border shadow-2xl">
+        <div className="flex items-center justify-between p-5 border-b border-border">
           <div>
-            <h2 className="text-base font-semibold text-white">Schedule a Site Visit</h2>
-            <p className="text-xs text-slate-400 mt-0.5">Our team will confirm within 2 hours</p>
+            <h2 className="text-base font-semibold text-foreground">Schedule a Site Visit</h2>
+            <p className="text-xs text-muted-foreground mt-0.5">Our team will confirm within 2 hours</p>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors"
+            className="w-8 h-8 rounded-lg bg-muted/40 hover:bg-muted flex items-center justify-center text-muted-foreground transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -168,11 +168,11 @@ function ScheduleForm({ onClose }: { onClose: () => void }) {
 
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-slate-300">Project / Property</label>
+            <label className="text-xs font-medium text-foreground">Project / Property</label>
             <select
               value={form.project}
               onChange={(e) => setForm({ ...form, project: e.target.value })}
-              className="w-full h-10 rounded-xl bg-white/5 border border-white/10 text-sm text-slate-200 px-3 focus:outline-none focus:border-violet-500/60"
+              className="w-full h-10 rounded-xl bg-background border border-border text-sm text-foreground px-3 focus:outline-none focus:border-primary/60"
               required
             >
               <option value="" disabled>Select a project</option>
@@ -185,29 +185,29 @@ function ScheduleForm({ onClose }: { onClose: () => void }) {
 
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-slate-300">Preferred Date</label>
+              <label className="text-xs font-medium text-foreground">Preferred Date</label>
               <Input
                 type="date"
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
-                className="h-10 rounded-xl bg-white/5 border-white/10 text-slate-200 focus-visible:ring-violet-500"
+                className="h-10 rounded-xl bg-background border-border text-foreground focus-visible:ring-primary"
                 required
               />
             </div>
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-slate-300">Preferred Time</label>
+              <label className="text-xs font-medium text-foreground">Preferred Time</label>
               <Input
                 type="time"
                 value={form.time}
                 onChange={(e) => setForm({ ...form, time: e.target.value })}
-                className="h-10 rounded-xl bg-white/5 border-white/10 text-slate-200 focus-visible:ring-violet-500"
+                className="h-10 rounded-xl bg-background border-border text-foreground focus-visible:ring-primary"
                 required
               />
             </div>
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-slate-300">Visit Type</label>
+            <label className="text-xs font-medium text-foreground">Visit Type</label>
             <div className="flex gap-2">
               {["In-person Tour", "Guided Walk", "Virtual Tour"].map((type) => (
                 <button
@@ -216,8 +216,8 @@ function ScheduleForm({ onClose }: { onClose: () => void }) {
                   onClick={() => setForm({ ...form, visitType: type })}
                   className={`flex-1 h-9 rounded-xl border text-xs font-medium transition-all ${
                     form.visitType === type
-                      ? "bg-violet-600/20 border-violet-500/50 text-violet-300"
-                      : "bg-white/5 border-white/10 text-slate-400 hover:border-white/20"
+                      ? "bg-primary/10 border-primary/50 text-primary"
+                      : "bg-muted/40 border-border text-muted-foreground hover:border-border"
                   }`}
                 >
                   {type}
@@ -227,13 +227,13 @@ function ScheduleForm({ onClose }: { onClose: () => void }) {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-slate-300">Notes (optional)</label>
+            <label className="text-xs font-medium text-foreground">Notes (optional)</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
               placeholder="Any specific unit preferences or questions..."
               rows={3}
-              className="w-full rounded-xl bg-white/5 border border-white/10 text-sm text-slate-200 placeholder:text-slate-600 p-3 resize-none focus:outline-none focus:border-violet-500/60"
+              className="w-full rounded-xl bg-background border border-border text-sm text-foreground placeholder:text-muted-foreground p-3 resize-none focus:outline-none focus:border-primary/60"
             />
           </div>
 
@@ -241,7 +241,7 @@ function ScheduleForm({ onClose }: { onClose: () => void }) {
             <Button
               type="button"
               variant="outline"
-              className="flex-1 h-10 rounded-xl border-white/10 text-slate-400 bg-transparent hover:bg-white/5"
+              className="flex-1 h-10 rounded-xl border-border text-muted-foreground bg-transparent hover:bg-muted/40"
               onClick={onClose}
             >
               Cancel
@@ -265,16 +265,16 @@ export default function VisitsPage() {
   const [showForm, setShowForm] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white">
+    <div className="min-h-full bg-background">
       {showForm && <ScheduleForm onClose={() => setShowForm(false)} />}
 
       {/* Header */}
-      <div className="border-b border-white/5 bg-gradient-to-br from-slate-900 via-[#0f0f1a] to-[#0a0a0f] px-6 py-8">
+      <div className="border-b border-border bg-card px-6 py-8">
         <div className="max-w-5xl mx-auto flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-medium text-violet-400 tracking-widest uppercase mb-1">Buyer OS</p>
-            <h1 className="text-2xl font-bold tracking-tight">Site Visits</h1>
-            <p className="text-slate-400 text-sm mt-1">
+            <p className="text-xs font-medium text-primary tracking-widest uppercase mb-1">Buyer OS</p>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">Site Visits</h1>
+            <p className="text-muted-foreground text-sm mt-1">
               {upcomingVisits.length} upcoming &nbsp;·&nbsp; {pastVisits.length} completed
             </p>
           </div>
@@ -293,9 +293,9 @@ export default function VisitsPage() {
         {/* ── Upcoming Visits ─────────────────────────────────────────── */}
         <section>
           <div className="flex items-center gap-2 mb-5">
-            <CalendarDays className="w-4 h-4 text-violet-400" />
-            <h2 className="text-base font-semibold text-white">Upcoming Visits</h2>
-            <Badge className="bg-violet-500/15 text-violet-300 border-violet-500/30 text-[10px]">
+            <CalendarDays className="w-4 h-4 text-primary" />
+            <h2 className="text-base font-semibold text-foreground">Upcoming Visits</h2>
+            <Badge className="bg-primary/10 text-primary border-primary/20 text-[10px]">
               {upcomingVisits.length}
             </Badge>
           </div>
@@ -304,7 +304,7 @@ export default function VisitsPage() {
             {upcomingVisits.map((visit) => (
               <Card
                 key={visit.id}
-                className="bg-[#12121f] border-white/8 rounded-2xl overflow-hidden hover:border-violet-500/20 transition-all"
+                className="bg-card border-border rounded-2xl overflow-hidden hover:border-primary/20 transition-all"
               >
                 <CardContent className="p-5">
                   <div className="flex gap-4">
@@ -315,52 +315,52 @@ export default function VisitsPage() {
                     <div className="flex-1 space-y-3">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <p className="text-sm font-semibold text-white">{visit.project}</p>
-                          <div className="flex items-center gap-1 text-xs text-slate-400 mt-0.5">
+                          <p className="text-sm font-semibold text-foreground">{visit.project}</p>
+                          <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
                             <MapPin className="w-3 h-3 text-rose-400 shrink-0" />
                             {visit.address}
                           </div>
                         </div>
-                        <Badge className="bg-violet-500/15 text-violet-300 border-violet-500/30 text-[10px] shrink-0">
+                        <Badge className="bg-primary/10 text-primary border-primary/20 text-[10px] shrink-0">
                           {visit.type}
                         </Badge>
                       </div>
 
-                      <div className="flex flex-wrap gap-4 text-xs text-slate-400">
+                      <div className="flex flex-wrap gap-4 text-xs text-muted-foreground">
                         <div className="flex items-center gap-1.5">
-                          <Calendar className="w-3.5 h-3.5 text-violet-400" />
+                          <Calendar className="w-3.5 h-3.5 text-primary" />
                           {visit.date}
                         </div>
                         <div className="flex items-center gap-1.5">
-                          <Clock className="w-3.5 h-3.5 text-violet-400" />
+                          <Clock className="w-3.5 h-3.5 text-primary" />
                           {visit.time}
                         </div>
                       </div>
 
-                      <Separator className="bg-white/5" />
+                      <Separator className="bg-border" />
 
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-full bg-violet-500/20 flex items-center justify-center">
-                            <User className="w-4 h-4 text-violet-400" />
+                          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                            <User className="w-4 h-4 text-primary" />
                           </div>
                           <div>
-                            <p className="text-xs font-medium text-white">{visit.agent}</p>
-                            <p className="text-[10px] text-slate-500">{visit.agentRole}</p>
+                            <p className="text-xs font-medium text-foreground">{visit.agent}</p>
+                            <p className="text-[10px] text-muted-foreground">{visit.agentRole}</p>
                           </div>
                         </div>
                         <div className="flex gap-2">
                           <Button
                             variant="outline"
                             size="sm"
-                            className="h-8 rounded-xl border-white/10 text-slate-400 bg-white/5 hover:bg-white/10 gap-1.5 text-xs"
+                            className="h-8 rounded-xl border-border text-muted-foreground bg-muted/40 hover:bg-muted gap-1.5 text-xs"
                           >
                             <Phone className="w-3 h-3" />
                             Call
                           </Button>
                           <Button
                             size="sm"
-                            className="h-8 rounded-xl bg-violet-600/20 hover:bg-violet-600/30 text-violet-300 border border-violet-500/30 text-xs"
+                            className="h-8 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 text-xs"
                           >
                             Reschedule
                           </Button>
@@ -377,9 +377,9 @@ export default function VisitsPage() {
         {/* ── Past Visits ─────────────────────────────────────────────── */}
         <section>
           <div className="flex items-center gap-2 mb-5">
-            <Building2 className="w-4 h-4 text-slate-400" />
-            <h2 className="text-base font-semibold text-white">Visit History</h2>
-            <Badge className="bg-slate-500/15 text-slate-400 border-slate-500/30 text-[10px]">
+            <Building2 className="w-4 h-4 text-muted-foreground" />
+            <h2 className="text-base font-semibold text-foreground">Visit History</h2>
+            <Badge className="bg-muted text-muted-foreground border-border text-[10px]">
               {pastVisits.length}
             </Badge>
           </div>
@@ -392,19 +392,19 @@ export default function VisitsPage() {
               return (
                 <Card
                   key={visit.id}
-                  className="bg-[#12121f] border-white/8 rounded-2xl overflow-hidden"
+                  className="bg-card border-border rounded-2xl overflow-hidden"
                 >
                   <CardHeader className="pb-0 px-5 pt-5">
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <CardTitle className="text-sm font-semibold text-white">{visit.project}</CardTitle>
-                        <div className="flex items-center gap-1 text-xs text-slate-400 mt-0.5">
+                        <CardTitle className="text-sm font-semibold text-foreground">{visit.project}</CardTitle>
+                        <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5">
                           <MapPin className="w-3 h-3 text-rose-400 shrink-0" />
                           {visit.address}
                         </div>
                       </div>
                       <div className="flex flex-col items-end gap-1.5 shrink-0">
-                        <div className="flex items-center gap-1 text-xs text-slate-400">
+                        <div className="flex items-center gap-1 text-xs text-muted-foreground">
                           <Calendar className="w-3 h-3" />
                           {visit.date}
                         </div>
@@ -416,11 +416,11 @@ export default function VisitsPage() {
                   <CardContent className="px-5 py-4 space-y-4">
                     {/* Stats row */}
                     <div className="flex flex-wrap gap-4">
-                      <div className="flex items-center gap-1.5 text-xs text-slate-400">
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                         <Image className="w-3.5 h-3.5 text-sky-400" />
                         {visit.photosCount} photos
                       </div>
-                      <div className="flex items-center gap-1.5 text-xs text-slate-400">
+                      <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                         <CheckSquare className="w-3.5 h-3.5 text-emerald-400" />
                         {visit.checklist.filter((c) => c.done).length}/{visit.checklist.length} checks ({donePct}%)
                       </div>
@@ -433,9 +433,9 @@ export default function VisitsPage() {
                           {item.done ? (
                             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                           ) : (
-                            <Circle className="w-3.5 h-3.5 text-slate-600 shrink-0" />
+                            <Circle className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
                           )}
-                          <span className={item.done ? "text-slate-300" : "text-slate-600"}>{item.item}</span>
+                          <span className={item.done ? "text-foreground" : "text-muted-foreground"}>{item.item}</span>
                         </div>
                       ))}
                     </div>
@@ -445,32 +445,32 @@ export default function VisitsPage() {
                       {Array.from({ length: Math.min(visit.photosCount, 5) }).map((_, i) => (
                         <div
                           key={i}
-                          className="w-14 h-14 rounded-xl bg-white/5 border border-white/8 flex items-center justify-center shrink-0"
+                          className="w-14 h-14 rounded-xl bg-muted/40 border border-border flex items-center justify-center shrink-0"
                         >
-                          <Camera className="w-4 h-4 text-slate-600" />
+                          <Camera className="w-4 h-4 text-muted-foreground" />
                         </div>
                       ))}
                       {visit.photosCount > 5 && (
-                        <div className="w-14 h-14 rounded-xl bg-white/5 border border-white/8 flex items-center justify-center shrink-0">
-                          <span className="text-[10px] text-slate-500">+{visit.photosCount - 5}</span>
+                        <div className="w-14 h-14 rounded-xl bg-muted/40 border border-border flex items-center justify-center shrink-0">
+                          <span className="text-[10px] text-muted-foreground">+{visit.photosCount - 5}</span>
                         </div>
                       )}
                     </div>
 
                     {/* AI Summary */}
-                    <div className="rounded-xl bg-violet-900/20 border border-violet-500/20 p-3.5 space-y-1.5">
-                      <div className="flex items-center gap-1.5 text-[10px] font-medium text-violet-300 uppercase tracking-wider">
+                    <div className="rounded-xl bg-primary/5 border border-primary/20 p-3.5 space-y-1.5">
+                      <div className="flex items-center gap-1.5 text-[10px] font-medium text-primary uppercase tracking-wider">
                         <Sparkles className="w-3 h-3" />
                         AI Visit Summary
                       </div>
-                      <p className="text-xs text-slate-300 leading-relaxed">{visit.aiSummary}</p>
+                      <p className="text-xs text-foreground leading-relaxed">{visit.aiSummary}</p>
                     </div>
 
                     <div className="flex gap-2 pt-1">
                       <Button
                         variant="outline"
                         size="sm"
-                        className="h-8 rounded-xl border-white/10 text-slate-400 bg-white/5 hover:bg-white/10 text-xs gap-1.5"
+                        className="h-8 rounded-xl border-border text-muted-foreground bg-muted/40 hover:bg-muted text-xs gap-1.5"
                       >
                         <Camera className="w-3 h-3" />
                         View Photos
