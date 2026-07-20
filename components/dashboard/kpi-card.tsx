@@ -43,8 +43,8 @@ export function KPICard({
       {/* Left: icon + value */}
       <div className="flex items-center gap-4 min-w-0">
         {/* Dark circle icon — like the reference */}
-        <div className="w-11 h-11 rounded-full bg-foreground dark:bg-muted flex items-center justify-center shrink-0">
-          <div className="w-5 h-5 text-white dark:text-foreground/80">{icon}</div>
+        <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+          <div className="w-5 h-5 text-primary">{icon}</div>
         </div>
         <div className="min-w-0">
           <p className="text-[11px] font-medium text-muted-foreground truncate">{title}</p>

@@ -59,13 +59,13 @@ export function Header({ variant = "os", onMenuClick }: HeaderProps) {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setCommandOpen(true)}
-            className="w-10 h-10 rounded-full bg-foreground/90 dark:bg-foreground/10 flex items-center justify-center text-white dark:text-foreground hover:opacity-80 transition-opacity"
+            className="w-10 h-10 rounded-full bg-muted hover:bg-muted/70 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
           >
             <Search className="w-4 h-4" />
           </button>
 
           <div className="relative">
-            <button className="w-10 h-10 rounded-full bg-foreground/90 dark:bg-foreground/10 flex items-center justify-center text-white dark:text-foreground hover:opacity-80 transition-opacity">
+            <button className="w-10 h-10 rounded-full bg-muted hover:bg-muted/70 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
               <Bell className="w-4 h-4" />
             </button>
             <span className="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-card" />
@@ -73,7 +73,7 @@ export function Header({ variant = "os", onMenuClick }: HeaderProps) {
 
           <button
             onClick={toggleDark}
-            className="w-10 h-10 rounded-full bg-foreground/90 dark:bg-foreground/10 flex items-center justify-center text-white dark:text-foreground hover:opacity-80 transition-opacity"
+            className="w-10 h-10 rounded-full bg-muted hover:bg-muted/70 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
           >
             {dark ? <Sun className="w-4 h-4" /> : <MessageSquare className="w-4 h-4" />}
           </button>

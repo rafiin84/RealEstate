@@ -130,7 +130,7 @@ const banks = [
     maxTenure: "30 yr",
     rating: 4.5,
     tag: "Popular",
-    tagColor: "bg-blue-100 text-blue-700",
+    tagColor: "bg-blue-100 text-primary",
   },
   {
     name: "SBI",
@@ -246,12 +246,12 @@ export default function LoanCentrePage() {
   const loanAmountLakh = loanAmount / 100000;
 
   return (
-    <div className="min-h-screen bg-gray-50/50 p-4 md:p-8 space-y-6">
+    <div className="min-h-full bg-background p-4 md:p-8 space-y-6">
       {/* ── Page Header ── */}
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-            <IndianRupee className="w-6 h-6 text-blue-600" />
+          <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
+            <IndianRupee className="w-6 h-6 text-primary" />
             Loan Centre
           </h1>
           <p className="text-muted-foreground mt-1 text-sm">
@@ -273,12 +273,12 @@ export default function LoanCentrePage() {
         ].map(({ icon: Icon, label, value }) => (
           <Card key={label} className="border-0 shadow-sm bg-white">
             <CardContent className="p-3 flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
-                <Icon className="w-4 h-4 text-blue-600" />
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <Icon className="w-4 h-4 text-primary" />
               </div>
               <div>
                 <p className="text-xs text-muted-foreground">{label}</p>
-                <p className="text-sm font-semibold text-gray-900">{value}</p>
+                <p className="text-sm font-semibold text-foreground">{value}</p>
               </div>
             </CardContent>
           </Card>
@@ -289,7 +289,7 @@ export default function LoanCentrePage() {
       <Card className="border-0 shadow-md bg-white">
         <CardHeader className="pb-3">
           <CardTitle className="flex items-center gap-2 text-base">
-            <Calculator className="w-5 h-5 text-blue-600" />
+            <Calculator className="w-5 h-5 text-primary" />
             EMI Calculator
           </CardTitle>
         </CardHeader>
@@ -300,8 +300,8 @@ export default function LoanCentrePage() {
               {/* Loan Amount */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <Label className="text-sm font-medium text-gray-700">Loan Amount</Label>
-                  <span className="text-sm font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                  <Label className="text-sm font-medium text-foreground">Loan Amount</Label>
+                  <span className="text-sm font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">
                     {formatINR(loanAmount)}
                   </span>
                 </div>
@@ -322,12 +322,12 @@ export default function LoanCentrePage() {
               {/* Tenure */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <Label className="text-sm font-medium text-gray-700">
+                  <Label className="text-sm font-medium text-foreground">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-3.5 h-3.5" /> Tenure
                     </span>
                   </Label>
-                  <span className="text-sm font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                  <span className="text-sm font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">
                     {tenure} years
                   </span>
                 </div>
@@ -347,7 +347,7 @@ export default function LoanCentrePage() {
 
               {/* Interest Rate */}
               <div className="space-y-2">
-                <Label className="text-sm font-medium text-gray-700 flex items-center gap-1">
+                <Label className="text-sm font-medium text-foreground flex items-center gap-1">
                   <Percent className="w-3.5 h-3.5" /> Interest Rate (% p.a.)
                 </Label>
                 <div className="relative">
@@ -358,7 +358,7 @@ export default function LoanCentrePage() {
                     step="0.05"
                     min="5"
                     max="20"
-                    className="pr-8 text-sm h-9 border-gray-200 focus:border-blue-400"
+                    className="pr-8 text-sm h-9 border-border focus:border-primary"
                   />
                   <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-xs">
                     %
@@ -370,36 +370,36 @@ export default function LoanCentrePage() {
             {/* Results */}
             <div className="flex flex-col justify-between gap-4">
               {/* EMI Highlight */}
-              <div className="rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 p-5 text-white">
-                <p className="text-blue-100 text-xs font-medium uppercase tracking-wide mb-1">
+              <div className="rounded-xl bg-primary p-5 text-white">
+                <p className="text-white/70 text-xs font-medium uppercase tracking-wide mb-1">
                   Monthly EMI
                 </p>
                 <p className="text-3xl font-bold tracking-tight">
                   {formatINRMonthly(Math.round(emi))}
                 </p>
-                <p className="text-blue-200 text-xs mt-1">
+                <p className="text-white/60 text-xs mt-1">
                   {loanAmountLakh.toFixed(0)}L · {tenure} yrs · {interestRate}%
                 </p>
               </div>
 
               {/* Breakdown */}
               <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-lg border border-gray-100 bg-gray-50 p-3">
+                <div className="rounded-lg border border-border bg-muted/40 p-3">
                   <p className="text-xs text-muted-foreground mb-1">Total Interest</p>
                   <p className="text-sm font-bold text-amber-600">
                     {formatINR(Math.round(totalInterest))}
                   </p>
                 </div>
-                <div className="rounded-lg border border-gray-100 bg-gray-50 p-3">
+                <div className="rounded-lg border border-border bg-muted/40 p-3">
                   <p className="text-xs text-muted-foreground mb-1">Total Amount</p>
-                  <p className="text-sm font-bold text-gray-900">
+                  <p className="text-sm font-bold text-foreground">
                     {formatINR(Math.round(totalAmount))}
                   </p>
                 </div>
               </div>
 
               {/* Pie Chart */}
-              <div className="rounded-lg border border-gray-100 bg-gray-50 p-4">
+              <div className="rounded-lg border border-border bg-muted/40 p-4">
                 <p className="text-xs font-medium text-muted-foreground mb-3">
                   Principal vs Interest Breakup
                 </p>
@@ -452,7 +452,7 @@ export default function LoanCentrePage() {
           <Card className="border-0 shadow-md bg-white">
             <CardHeader className="pb-3">
               <CardTitle className="text-base flex items-center gap-2">
-                <User className="w-4 h-4 text-blue-600" />
+                <User className="w-4 h-4 text-primary" />
                 Check Loan Eligibility
               </CardTitle>
               <p className="text-xs text-muted-foreground">
@@ -554,8 +554,8 @@ export default function LoanCentrePage() {
               )}
 
               {/* Credit Score Guide */}
-              <div className="rounded-lg bg-gray-50 border border-gray-100 p-4">
-                <p className="text-xs font-semibold text-gray-700 mb-3">
+              <div className="rounded-lg bg-muted/40 border border-border p-4">
+                <p className="text-xs font-semibold text-foreground mb-3">
                   CIBIL Score Guide
                 </p>
                 <div className="space-y-2">
@@ -569,7 +569,7 @@ export default function LoanCentrePage() {
                       <div className="w-24 flex-shrink-0">
                         <Progress value={parseInt(w)} className="h-1.5" />
                       </div>
-                      <span className="text-xs text-gray-500 w-20">{range}</span>
+                      <span className="text-xs text-muted-foreground w-20">{range}</span>
                       <Badge
                         variant="outline"
                         className={`text-xs px-2 py-0 ${
@@ -597,7 +597,7 @@ export default function LoanCentrePage() {
           <Card className="border-0 shadow-md bg-white">
             <CardHeader className="pb-3">
               <CardTitle className="text-base flex items-center gap-2">
-                <Building2 className="w-4 h-4 text-blue-600" />
+                <Building2 className="w-4 h-4 text-primary" />
                 Bank Comparison
               </CardTitle>
               <p className="text-xs text-muted-foreground">
@@ -610,17 +610,17 @@ export default function LoanCentrePage() {
                 {banks.map((bank) => (
                   <div
                     key={bank.name}
-                    className="rounded-xl border border-gray-100 bg-gray-50/60 p-4 flex items-center gap-4 hover:bg-blue-50/40 hover:border-blue-200 transition-colors"
+                    className="rounded-xl border border-border bg-muted/30 p-4 flex items-center gap-4 hover:bg-primary/5 hover:border-primary/30 transition-colors"
                   >
                     {/* Bank Initial */}
-                    <div className="w-10 h-10 rounded-lg bg-white border border-gray-200 flex items-center justify-center font-bold text-blue-700 text-sm flex-shrink-0 shadow-sm">
+                    <div className="w-10 h-10 rounded-lg bg-card border border-border flex items-center justify-center font-bold text-primary text-sm flex-shrink-0 shadow-sm">
                       {bank.name.slice(0, 2)}
                     </div>
 
                     {/* Details */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-semibold text-sm text-gray-900">{bank.name}</span>
+                        <span className="font-semibold text-sm text-foreground">{bank.name}</span>
                         {bank.tag && (
                           <span
                             className={`text-xs px-2 py-0.5 rounded-full font-medium ${bank.tagColor}`}
@@ -630,7 +630,7 @@ export default function LoanCentrePage() {
                         )}
                       </div>
                       <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-                        <span className="flex items-center gap-1 font-semibold text-blue-600">
+                        <span className="flex items-center gap-1 font-semibold text-primary">
                           <Percent className="w-3 h-3" />
                           {bank.rate}% p.a.
                         </span>
@@ -650,7 +650,7 @@ export default function LoanCentrePage() {
                     <Button
                       size="sm"
                       variant="outline"
-                      className="border-blue-200 text-blue-700 hover:bg-blue-600 hover:text-white hover:border-blue-600 text-xs flex-shrink-0"
+                      className="border-primary/30 text-primary hover:bg-primary hover:text-white hover:border-primary text-xs flex-shrink-0"
                     >
                       Apply
                     </Button>
@@ -674,7 +674,7 @@ export default function LoanCentrePage() {
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-base flex items-center gap-2">
-                  <FileText className="w-4 h-4 text-blue-600" />
+                  <FileText className="w-4 h-4 text-primary" />
                   My Applications
                 </CardTitle>
                 <Badge className="bg-amber-100 text-amber-700 border-amber-200">
@@ -687,13 +687,13 @@ export default function LoanCentrePage() {
               <div className="rounded-xl border border-blue-200 bg-blue-50/30 p-4">
                 <div className="flex items-start justify-between gap-3 mb-4">
                   <div>
-                    <p className="font-semibold text-sm text-gray-900">HDFC Bank — Pre-Approval</p>
+                    <p className="font-semibold text-sm text-foreground">HDFC Bank — Pre-Approval</p>
                     <p className="text-xs text-muted-foreground mt-0.5">
                       App ID: HDFC2026071201 · Submitted 12 Jul 2026
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-lg font-bold text-blue-700">₹96 L</p>
+                    <p className="text-lg font-bold text-primary">₹96 L</p>
                     <p className="text-xs text-muted-foreground">Requested</p>
                   </div>
                 </div>
@@ -702,7 +702,7 @@ export default function LoanCentrePage() {
                 <div className="mb-4">
                   <div className="flex justify-between text-xs mb-1">
                     <span className="text-muted-foreground">Overall Progress</span>
-                    <span className="font-medium text-blue-600">40%</span>
+                    <span className="font-medium text-primary">40%</span>
                   </div>
                   <Progress value={40} className="h-2" />
                 </div>
@@ -718,8 +718,8 @@ export default function LoanCentrePage() {
                             step.status === "done"
                               ? "bg-green-100 text-green-600"
                               : step.status === "active"
-                              ? "bg-blue-600 text-white shadow-md shadow-blue-200"
-                              : "bg-gray-100 text-gray-400"
+                              ? "bg-primary text-white shadow-md shadow-primary/20"
+                              : "bg-muted text-muted-foreground"
                           }`}
                         >
                           {step.status === "done" ? (
@@ -733,7 +733,7 @@ export default function LoanCentrePage() {
                         {idx < applicationSteps.length - 1 && (
                           <div
                             className={`w-0.5 h-8 ${
-                              step.status === "done" ? "bg-green-200" : "bg-gray-200"
+                              step.status === "done" ? "bg-green-200" : "bg-border"
                             }`}
                           />
                         )}
@@ -744,10 +744,10 @@ export default function LoanCentrePage() {
                         <p
                           className={`text-sm font-medium ${
                             step.status === "active"
-                              ? "text-blue-700"
+                              ? "text-primary"
                               : step.status === "done"
-                              ? "text-gray-900"
-                              : "text-gray-400"
+                              ? "text-foreground"
+                              : "text-muted-foreground"
                           }`}
                         >
                           {step.step}
@@ -758,8 +758,8 @@ export default function LoanCentrePage() {
                             step.status === "done"
                               ? "text-green-600"
                               : step.status === "active"
-                              ? "text-blue-600"
-                              : "text-gray-400"
+                              ? "text-primary"
+                              : "text-muted-foreground"
                           }`}
                         >
                           {step.date}
@@ -772,7 +772,7 @@ export default function LoanCentrePage() {
 
               <Button
                 variant="outline"
-                className="w-full border-blue-200 text-blue-700 hover:bg-blue-50"
+                className="w-full border-primary/30 text-primary hover:bg-primary/5"
               >
                 Start New Application
                 <ChevronRight className="w-4 h-4 ml-1" />
@@ -786,7 +786,7 @@ export default function LoanCentrePage() {
           <Card className="border-0 shadow-md bg-white">
             <CardHeader className="pb-3">
               <CardTitle className="text-base flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-blue-600" />
+                <CheckCircle2 className="w-4 h-4 text-primary" />
                 Document Checklist
               </CardTitle>
               <p className="text-xs text-muted-foreground">
@@ -832,18 +832,18 @@ export default function LoanCentrePage() {
                     ],
                   },
                 ].map(({ category, icon: Icon, items }) => (
-                  <div key={category} className="rounded-lg border border-gray-100 overflow-hidden">
-                    <div className="bg-gray-50 px-4 py-2.5 flex items-center gap-2 border-b border-gray-100">
-                      <Icon className="w-3.5 h-3.5 text-blue-600" />
-                      <span className="text-xs font-semibold text-gray-700">{category}</span>
+                  <div key={category} className="rounded-lg border border-border overflow-hidden">
+                    <div className="bg-muted/40 px-4 py-2.5 flex items-center gap-2 border-b border-border">
+                      <Icon className="w-3.5 h-3.5 text-primary" />
+                      <span className="text-xs font-semibold text-foreground">{category}</span>
                     </div>
-                    <div className="divide-y divide-gray-50">
+                    <div className="divide-y divide-border">
                       {items.map(({ name, status }) => (
                         <div
                           key={name}
-                          className="flex items-center justify-between px-4 py-2.5 hover:bg-gray-50/50"
+                          className="flex items-center justify-between px-4 py-2.5 hover:bg-muted/30"
                         >
-                          <span className="text-sm text-gray-700">{name}</span>
+                          <span className="text-sm text-foreground">{name}</span>
                           <div className="flex items-center gap-2">
                             {status === "uploaded" ? (
                               <Badge className="bg-green-100 text-green-700 border-green-200 text-xs px-2 py-0">
@@ -861,7 +861,7 @@ export default function LoanCentrePage() {
                               <Button
                                 size="sm"
                                 variant="outline"
-                                className="h-6 text-xs px-2 border-blue-200 text-blue-600 hover:bg-blue-50"
+                                className="h-6 text-xs px-2 border-primary/30 text-primary hover:bg-primary/5"
                               >
                                 Upload
                               </Button>
@@ -880,10 +880,10 @@ export default function LoanCentrePage() {
                   <span className="text-sm font-medium text-blue-800">
                     Document Completion
                   </span>
-                  <span className="text-sm font-bold text-blue-700">5 / 10</span>
+                  <span className="text-sm font-bold text-primary">5 / 10</span>
                 </div>
                 <Progress value={50} className="h-2" />
-                <p className="text-xs text-blue-600 mt-2">
+                <p className="text-xs text-primary mt-2">
                   Upload 5 more documents to complete your profile and speed up approval.
                 </p>
               </div>

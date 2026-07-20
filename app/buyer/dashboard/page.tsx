@@ -64,7 +64,7 @@ const matchedProperties = [
     features: ["Metro 800m", "Top Schools Nearby", "Green Spaces"],
     status: "Under Construction",
     statusColor: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
-    coverAccent: "bg-gradient-to-br from-violet-500/25 via-blue-500/15 to-indigo-500/10",
+    coverAccent: "bg-primary/8",
   },
   {
     id: "proj-004",
@@ -76,13 +76,13 @@ const matchedProperties = [
     gradientFrom: "from-emerald-600/30",
     gradientTo: "to-teal-500/20",
     icon: TreePine,
-    iconColor: "text-emerald-400",
+    iconColor: "text-emerald-600",
     bgColor: "bg-emerald-500/10",
-    accentColor: "text-emerald-600 dark:text-emerald-400",
+    accentColor: "text-emerald-600",
     features: ["Gated Community", "RERA Approved", "Airport 12 km"],
     status: "Planning",
-    statusColor: "bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400",
-    coverAccent: "bg-gradient-to-br from-emerald-500/25 via-teal-500/15 to-green-500/10",
+    statusColor: "bg-sky-100 text-sky-700",
+    coverAccent: "bg-emerald-500/8",
   },
   {
     id: "proj-002",
@@ -94,13 +94,13 @@ const matchedProperties = [
     gradientFrom: "from-amber-600/30",
     gradientTo: "to-orange-500/20",
     icon: Home,
-    iconColor: "text-amber-400",
+    iconColor: "text-amber-600",
     bgColor: "bg-amber-500/10",
-    accentColor: "text-amber-600 dark:text-amber-400",
+    accentColor: "text-amber-600",
     features: ["Private Pool", "Golf View", "Smart Home"],
     status: "Ready to Move",
-    statusColor: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-    coverAccent: "bg-gradient-to-br from-amber-500/25 via-orange-500/15 to-yellow-500/10",
+    statusColor: "bg-emerald-100 text-emerald-700",
+    coverAccent: "bg-amber-500/8",
   },
 ];
 
@@ -170,8 +170,7 @@ export default function BuyerDashboardPage() {
       </div>
 
       {/* ── AI Buyer Persona ────────────────────────────────────────── */}
-      <div className="relative rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/8 via-primary/4 to-transparent p-[1px]">
-        <div className="rounded-2xl bg-card/80 backdrop-blur-sm">
+      <Card className="border-border">
           <CardContent className="p-5">
             <div className="flex items-start gap-4">
               <div className="w-11 h-11 rounded-xl bg-primary/15 flex items-center justify-center shrink-0 ring-1 ring-primary/20">
@@ -225,8 +224,7 @@ export default function BuyerDashboardPage() {
               </Button>
             </div>
           </CardContent>
-        </div>
-      </div>
+      </Card>
 
       {/* ── Main grid ───────────────────────────────────────────────── */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
