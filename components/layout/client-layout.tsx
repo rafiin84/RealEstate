@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Sidebar } from "./sidebar";
 import { Header } from "./header";
+import { MobileBottomNav } from "./mobile-bottom-nav";
 import { osNavGroups, buyerNavGroups } from "./nav-config";
 
 interface ClientLayoutProps {
@@ -27,10 +28,11 @@ export function ClientLayout({ children, variant }: ClientLayoutProps) {
           variant={variant}
           onMenuClick={() => setSidebarOpen(true)}
         />
-        <main className="flex-1 overflow-y-auto bg-background">
+        <main className="flex-1 overflow-y-auto bg-background pb-24 lg:pb-0">
           {children}
         </main>
       </div>
+      <MobileBottomNav navGroups={navGroups} variant={variant} />
     </div>
   );
 }

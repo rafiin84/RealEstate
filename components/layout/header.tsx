@@ -32,13 +32,6 @@ export function Header({ variant = "os", onMenuClick }: HeaderProps) {
     <>
       <header className="h-[70px] border-b border-border bg-card flex items-center px-6 shrink-0 z-20 gap-4">
 
-        {/* Hamburger — mobile only */}
-        <button
-          onClick={onMenuClick}
-          className="lg:hidden w-9 h-9 rounded-xl bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground shrink-0"
-        >
-          <Menu className="w-4 h-4" />
-        </button>
 
         {/* Welcome text */}
         <div className="hidden md:block min-w-0">

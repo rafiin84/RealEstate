@@ -65,7 +65,7 @@ export function KPICard({
         </div>
       </div>
 
-      {/* Right: sparkline bars — like the mini bar charts in reference */}
+      {/* Right: sparkline bars */}
       <div className="w-20 h-10 shrink-0">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} barSize={4} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
