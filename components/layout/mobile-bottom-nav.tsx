@@ -66,9 +66,8 @@ export function MobileBottomNav({ navGroups, variant }: MobileBottomNavProps) {
 
       {/* More bottom sheet */}
       <div className={cn(
-        "fixed left-0 right-0 z-50 lg:hidden bg-white rounded-t-3xl shadow-2xl transition-transform duration-300 ease-in-out",
-        moreOpen ? "translate-y-0" : "translate-y-full",
-        "bottom-[65px]"
+        "fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-white rounded-t-3xl shadow-2xl transition-transform duration-300 ease-in-out",
+        moreOpen ? "translate-y-0" : "translate-y-full"
       )}>
         {/* Handle */}
         <div className="flex justify-center pt-3 pb-1">
@@ -156,6 +155,8 @@ export function MobileBottomNav({ navGroups, variant }: MobileBottomNavProps) {
             {variant === "os" ? "Buyer Portal" : "Enterprise"}
           </Link>
         </div>
+        {/* Spacer so content clears the bottom nav pill */}
+        <div className="h-24" />
       </div>
 
       {/* Bottom tab bar */}
